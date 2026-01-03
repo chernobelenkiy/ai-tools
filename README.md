@@ -12,15 +12,13 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
 
 ## Quick start
 
-1. Browse agent capabilities in `AGENTS.md` and open the corresponding file under `subagents/`.
-2. Follow `CLAUDE.md` for interaction style and output quality when using Claude.
-3. Use `links.md` to quickly jump to provider docs, SDKs, and tooling.
+1. Follow `CLAUDE.md` for interaction style and output quality when using Claude.
+2. Use `links.md` to quickly jump to provider docs, SDKs, and tooling.
 
 ## Repo structure
 
 ```
 .
-├── AGENTS.md
 ├── CLAUDE.md
 ├── links.md
 ├── mcp/
