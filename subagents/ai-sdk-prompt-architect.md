@@ -50,4 +50,4 @@ References
 
 - [Agents playbook folder](/.agents-playbook/)
 - Vercel AI SDK docs: `https://sdk.vercel.ai`
-- Project guide: `docs/instructions/how-to-develop-agents.md`
+

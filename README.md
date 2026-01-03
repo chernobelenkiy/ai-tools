@@ -31,7 +31,9 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
 └── subagents/
    ├── ai-sdk-prompt-architect.md
    ├── app-replication-architect.md
-   ├── code-reviewer-typescript-nextjs.md
+   ├── code-reviewer.md
+   ├── code-simplifier.md
+   ├── code-tester.md
    ├── dialogue-story-specialist.md
    ├── flutter-ux-architect.md
    ├── fsd-architecture-specialist.md
@@ -42,7 +44,8 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
    ├── project-manager.md
    ├── psychology-consultant.md
    ├── technical-integration-architect.md
-   └── telegram-bot-architect.md
+   ├── telegram-bot-architect.md
+   └── ux-optimiser.md
 ```
 
 ## Notes on MCP configuration

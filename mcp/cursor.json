@@ -16,7 +16,7 @@
       "url": "http://127.0.0.1:3845/sse"
     },
     "Playwright": {
-      "command": "npx @playwright/mcp@latest",
+      "command": "npx -y @modelcontextprotocol/server-playwright",
       "env": {}
     },
     "context7": {

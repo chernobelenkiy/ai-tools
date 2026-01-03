@@ -22,6 +22,7 @@ Developer-oriented AI links.
 
 *   [Model Context Protocol (MCP)](https://github.com/mcp)
 *   [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers) — Community list
+*   [Playwright MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/playwright) — Browser automation for MCP
 
 ## Generative Media
 

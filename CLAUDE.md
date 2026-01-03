@@ -1,32 +1,40 @@
-# Claude Usage Guidelines
+# CLAUDE.md
 
-Concise rules for working with Claude across agents and docs in this repo.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Interaction principles
+## Repository Overview
 
-- Be explicit about goals, constraints, acceptance criteria, and deliverables.
-- Prefer minimal, verifiable outputs; avoid over-engineering.
-- Ask focused clarifying questions when scope is ambiguous.
+This is a collection of AI agent specifications, rules, and curated links for building AI-assisted workflows. No build system or tests—just markdown files organizing agent personas and integration configurations.
 
-## Output quality
+## Structure
 
-- Use clear structure with headings and bullets; keep high signal.
-- Follow repository conventions (paths like `.agents-playbook/[task-name]/`).
-- Provide code and specs that are testable and type-safe.
+- `subagents/` — Agent specs with YAML frontmatter (name, description, model, color) and markdown body defining behavior, deliverables, and workflow
+- `rules/` — Shared guidelines (e.g., `claude-rules.md`)
+- `mcp/` — MCP server configurations for editor integrations
+- `links.md` — Curated AI/developer tool links
 
-## Function/tool schemas
+## Agent Spec Format
 
-- Follow the user rule: avoid optional parameters in Zod schemas for OpenAI function calling; handle defaults in execution logic; keep schemas simple and explicit; test after changes.
+Each file in `subagents/` follows this pattern:
 
-## Security and privacy
+```markdown
+---
+name: agent-name
+description: One-line description
+model: sonnet|opus|haiku
+color: color-name
+---
 
-- Do not include secrets in commits or logs.
-- Redact tokens and credentials; use environment variables whenever possible.
+[Agent instructions in markdown]
+```
 
-## Cross-references
+## Key Conventions
 
-- See `AGENTS.md` for available agents and responsibilities.
-- See `links.md` for model, SDK, and tooling references.
-- Additional rules in `rules/claude.md`.
+1. **Working directory pattern**: Agents use `.agents-playbook/[task-name]/` for artifacts (tasks.md, design.md, requirements.md, memory-board.md, review.md)
+2. **Planning mode**: Agents ask clarifying questions before implementation; require explicit approval at stage gates
+3. **Minimal changes**: Do not over-engineer; make precise fixes; avoid unnecessary files and console logs
+4. **Context7**: Use `mcp__context7__resolve-library-id` and `mcp__context7__query-docs` to fetch library documentation
 
+## MCP Configuration
 
+`mcp/cursor.json` contains example MCP server configs (Context7, Playwright, Figma, GitHub, Supabase, etc.). Tokens should be injected via environment variables—never commit credentials.
