@@ -2,12 +2,13 @@
 
 A lightweight, opinionated collection of agent specs, rules, and links for building AI-assisted workflows. This repo focuses on clarity, interoperability (MCP), and pragmatic execution.
 
-## What’s inside
+## What's inside
 
 - `AGENTS.md` — Overview of available agents with roles and links
 - `CLAUDE.md` — Guidelines for using Claude effectively in this repo
 - `links.md` — Curated developer-oriented AI links
 - `subagents/` — Individual agent personas/specs
+- `skills/` — Reusable Claude Code skills with scripts (copy to your project's `.claude/skills/`)
 - `rules/` — Additional rules and guidelines (e.g., `rules/claude-rules.md`)
 - `mcp/cursor.json` — Example MCP server configuration for local tooling
 
@@ -25,27 +26,21 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
 ├── CLAUDE.md
 ├── links.md
 ├── mcp/
-│  └── cursor.json
+│   └── cursor.json
 ├── rules/
-│  └── claude-rules.md
+│   └── claude-rules.md
+├── skills/
+│   └── create-game-assets/   # DALL-E 3 game asset generator
+│       ├── SKILL.md
+│       ├── README.md
+│       ├── package.json
+│       └── src/
 └── subagents/
-   ├── ai-sdk-prompt-architect.md
-   ├── app-replication-architect.md
-   ├── code-reviewer.md
-   ├── code-simplifier.md
-   ├── code-tester.md
-   ├── dialogue-story-specialist.md
-   ├── flutter-ux-architect.md
-   ├── fsd-architecture-specialist.md
-   ├── game-design-architect.md
-   ├── mui-design-expert.md
-   ├── nextjs-fsd-developer.md
-   ├── product-marketing-strategist.md
-   ├── project-manager.md
-   ├── psychology-consultant.md
-   ├── technical-integration-architect.md
-   ├── telegram-bot-architect.md
-   └── ux-optimiser.md
+    ├── ai-sdk-prompt-architect.md
+    ├── code-reviewer.md
+    ├── fsd-architecture-specialist.md
+    ├── project-manager.md
+    └── ... (more agents)
 ```
 
 ## Notes on MCP configuration

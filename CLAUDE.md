@@ -9,6 +9,7 @@ This is a collection of AI agent specifications, rules, and curated links for bu
 ## Structure
 
 - `subagents/` — Agent specs with YAML frontmatter (name, description, model, color) and markdown body defining behavior, deliverables, and workflow
+- `skills/` — Reusable Claude Code skills with executable scripts
 - `rules/` — Shared guidelines (e.g., `claude-rules.md`)
 - `mcp/` — MCP server configurations for editor integrations
 - `links.md` — Curated AI/developer tool links
@@ -30,10 +31,19 @@ color: color-name
 
 ## Key Conventions
 
-1. **Working directory pattern**: Agents use `.agents-playbook/[task-name]/` for artifacts (tasks.md, design.md, requirements.md, memory-board.md, review.md)
-2. **Planning mode**: Agents ask clarifying questions before implementation; require explicit approval at stage gates
-3. **Minimal changes**: Do not over-engineer; make precise fixes; avoid unnecessary files and console logs
-4. **Context7**: Use `mcp__context7__resolve-library-id` and `mcp__context7__query-docs` to fetch library documentation
+1. **Planning mode**: Agents ask clarifying questions before implementation; require explicit approval at stage gates
+2. **Minimal changes**: Do not over-engineer; make precise fixes; avoid unnecessary files and console logs
+3. **Context7**: Use `mcp__context7__resolve-library-id` and `mcp__context7__query-docs` to fetch library documentation
+
+## Skills
+
+Skills in `skills/` are self-contained Claude Code skills with TypeScript scripts. To use a skill in another project:
+
+1. Copy the skill folder to your project's `.claude/skills/`
+2. Run `npm install` in the skill folder
+3. Set required environment variables (e.g., `OPENAI_API_KEY`)
+
+Each skill has a `SKILL.md` defining when/how Claude should use it, and a `README.md` with setup instructions.
 
 ## MCP Configuration
 
