@@ -35,11 +35,19 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
 │       ├── SKILL.md
 │       └── README.md
 └── subagents/
-    ├── ai-sdk-prompt-architect.md
-    ├── code-reviewer.md
-    ├── fsd-architecture-specialist.md
-    ├── project-manager.md
-    └── ... (more agents)
+    ├── general/              # Core development & management agents
+    │   ├── project-manager.md
+    │   ├── code-architect.md
+    │   ├── code-reviewer.md
+    │   ├── code-simplifier.md
+    │   ├── code-tester.md
+    │   ├── ux-optimiser.md
+    │   └── technical-integration-architect.md
+    └── specific/             # Specialized technology & domain agents
+        ├── ai-sdk-prompt-architect.md
+        ├── nextjs-fsd-developer.md
+        ├── flutter-ux-architect.md
+        └── ... (more specific agents)
 ```
 
 ## Notes on MCP configuration
