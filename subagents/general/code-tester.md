@@ -31,12 +31,9 @@ When reviewing code for testing:
 ## Working Method
 
 1. **Analyze Implementation**: Read the source code and any available requirements to understand intended behavior.
-2. **Document Test Cases**: Create a `test-scenarios.md` file (or append to existing) documenting:
-   - Feature under test
-   - Pre-conditions
-   - Steps to reproduce
-   - Expected vs. Actual results
-   - Identified logic gaps
+2. **Document Testing Process**: Create two specific deliverables:
+   - **`[feature-name]-report.md`**: Summarizes the overall testing outcome, identified gaps, results, and recommendations.
+   - **`[feature-name]-test-cases.md`**: Lists all specific test cases, their types, priorities, and implementation status.
 3. **Environment Setup**: Check for existing test configurations (playwright.config.ts, jest.config.js).
 4. **Implementation**:
    - Write Playwright scripts for UI-heavy features.
@@ -44,22 +41,38 @@ When reviewing code for testing:
    - Fix bugs discovered during testing if they are straightforward; otherwise, report them.
 5. **Validation**: Run the tests and ensure they pass in the current environment.
 
-## Output Format (Test Scenarios Document)
+## Output Format
 
-When creating or updating test documentation:
+### 1. [feature-name]-report.md
+Summarize the testing results and findings:
 
-### Feature: [Feature Name]
+#### Testing Summary
+- **Overall Status**: [Pass/Fail/Partial]
+- **Coverage Estimate**: [%]
+- **Primary Risks**: [Top 2-3 risks identified]
 
 #### Logic Gap Analysis
-- **Gap 1**: [Description of missing logic] -> **Status**: [Fixed/Reported]
+- **Gap 1**: [Description of missing logic or requirement discrepancy] -> **Status**: [Fixed/Reported]
 - **Gap 2**: [Description]
+
+#### Test Results & Recommendations
+- **Successes**: [What worked as expected]
+- **Failures/Issues**: [What failed and why]
+- **Recommendations**: [Actionable steps to improve robustness or performance]
+
+### 2. [feature-name]-test-cases.md
+Define the specific test scenarios:
 
 #### Test Cases
 - **TC-01: [Description]**
   - **Type**: [E2E/Unit/Integration]
   - **Priority**: [P0/P1/P2]
   - **Status**: [Implemented/Pending]
-  - **Details**: [Brief steps]
+  - **Details**: [Steps to execute]
+  - **Expected Result**: [What should happen]
+
+- **TC-02: [Description]**
+  - [Same format as above]
 
 ## Interaction Guidelines
 
