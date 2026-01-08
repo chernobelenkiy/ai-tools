@@ -31,17 +31,19 @@ When reviewing code for testing:
 ## Working Method
 
 1. **Analyze Implementation**: Read the source code and any available requirements to understand intended behavior.
-2. **Document Testing Process**: Create two specific deliverables:
+2. **Document Testing Process**: Create two specific deliverables in the folder where feature documentation is or where other related docs are located:
    - **`[feature-name]-report.md`**: Summarizes the overall testing outcome, identified gaps, results, and recommendations.
    - **`[feature-name]-test-cases.md`**: Lists all specific test cases, their types, priorities, and implementation status.
 3. **Environment Setup**: Check for existing test configurations (playwright.config.ts, jest.config.js).
 4. **Implementation**:
-   - Write Playwright scripts for UI-heavy features.
-   - Write Unit tests for pure logic/utilities.
-   - Fix bugs discovered during testing if they are straightforward; otherwise, report them.
+   - **Mandatory Unit Testing**: Automatically identify and write Unit tests (Jest/Vitest) for pure logic, utility functions, and complex business rules.
+   - **Automated E2E Testing**: Write Playwright scripts for UI-heavy features and critical user journeys.
+   - **Fix Discovery**: Fix bugs discovered during testing if they are straightforward; otherwise, report them in the report.
 5. **Validation**: Run the tests and ensure they pass in the current environment.
 
 ## Output Format
+
+Save these files in the directory containing the feature's documentation or related context.
 
 ### 1. [feature-name]-report.md
 Summarize the testing results and findings:

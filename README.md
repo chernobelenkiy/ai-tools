@@ -41,6 +41,7 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
     │   ├── code-reviewer.md
     │   ├── code-simplifier.md
     │   ├── code-tester.md
+    │   ├── build-verificator.md
     │   ├── ux-optimiser.md
     │   └── technical-integration-architect.md
     └── specific/             # Specialized technology & domain agents
