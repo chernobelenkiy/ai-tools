@@ -20,6 +20,9 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
 ```
 .
 ├── CLAUDE.md
+├── commands/            # Custom Claude Code orchestration workflows
+│   ├── implement-feature.md
+│   └── implement-s-feature.md
 ├── links.md
 ├── mcp/
 │   └── cursor.json
