@@ -12,6 +12,7 @@ You are orchestrating a lightweight implementation pipeline for small or well-de
 
 1. **Spawn plan agent** to:
    - Read the feature requirement or file specified by the user ($ARGUMENTS)
+   - **Ask clarifying questions** to the user to resolve any ambiguities
    - Create a concise implementation plan
    - Identify files to modify
 

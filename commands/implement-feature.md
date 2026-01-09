@@ -13,6 +13,7 @@ You are orchestrating a complete feature implementation pipeline. Follow these p
 1. **Spawn plan agent** to:
    - Read the feature file specified by the user ($ARGUMENTS)
    - Analyze requirements and gather context from documentation
+   - **Ask focused clarifying questions** to the user to resolve any ambiguities or missing requirements
    - Create a phased implementation plan (roadmap) with priorities (P0-P2) and T-shirt sizes (XS-XL)
    - Identify files to create/modify and note potential risks or blockers
 
