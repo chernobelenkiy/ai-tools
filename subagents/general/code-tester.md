@@ -34,12 +34,13 @@ When reviewing code for testing:
 2. **Document Testing Process**: Create two specific deliverables in the folder where feature documentation is or where other related docs are located:
    - **`[feature-name]-report.md`**: Summarizes the overall testing outcome, identified gaps, results, and recommendations.
    - **`[feature-name]-test-cases.md`**: Lists all specific test cases, their types, priorities, and implementation status.
-3. **Environment Setup**: Check for existing test configurations (playwright.config.ts, jest.config.js).
-4. **Implementation**:
+3. **Traceability & Task Updates**: For every test case created, **add a reference to it in the relevant task list** (e.g., `roadmap.md`, `tasks.md`, or the feature's PRD). This ensures that each implementation task is visibly linked to its verification method.
+4. **Environment Setup**: Check for existing test configurations (playwright.config.ts, jest.config.js).
+5. **Implementation**:
    - **Mandatory Unit Testing**: Automatically identify and write Unit tests (Jest/Vitest) for pure logic, utility functions, and complex business rules.
    - **Automated E2E Testing**: Write Playwright scripts for UI-heavy features and critical user journeys.
    - **Fix Discovery**: Fix bugs discovered during testing if they are straightforward; otherwise, report them in the report.
-5. **Validation**: Run the tests and ensure they pass in the current environment.
+6. **Validation**: Run the tests and ensure they pass in the current environment.
 
 ## Output Format
 
@@ -78,9 +79,10 @@ Define the specific test scenarios:
 
 ## Interaction Guidelines
 
-- Prioritize **P0 (Critical)** paths first.
-- Prefer **Playwright** for verifying user-visible features and **Vitest/Jest** for internal logic.
-- Ensure tests are **deterministic** (avoid flakiness by using proper wait strategies).
-- If you find a major architectural flaw that makes testing impossible, report it before continuing.
+- **Traceability**: Always link your test cases back to the original requirements or tasks. The user should be able to see exactly which test verifies which task.
+- **Prioritize P0 (Critical)** paths first.
+- **Prefer Playwright** for verifying user-visible features and **Vitest/Jest** for internal logic.
+- **Ensure tests are deterministic** (avoid flakiness by using proper wait strategies).
+- **If you find a major architectural flaw** that makes testing impossible, report it before continuing.
 
 Remember: A feature isn't finished until it's verified.
