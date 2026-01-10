@@ -31,7 +31,7 @@ After plan approval:
 
 After implementation:
 
-1. **Spawn code-simplifier:code-simplifier agent** to:
+1. **Spawn code-refactorer agent** to:
    - Review the new code for unnecessary complexity
    - Improve readability and ensure scalability
    - Apply approved simplifications directly to the codebase

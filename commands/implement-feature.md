@@ -32,7 +32,7 @@ Once user approves the plan:
 
 After implementation:
 
-1. **Spawn code-simplifier:code-simplifier agent** to review:
+1. **Spawn code-refactorer agent** to review:
    - Check for over-engineering
    - Improve readability and scalability
    - Suggest simplifications if needed
