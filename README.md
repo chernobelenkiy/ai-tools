@@ -41,17 +41,21 @@ A lightweight, opinionated collection of agent specs, rules, and links for build
     ├── general/              # Core development & management agents
     │   ├── project-manager.md
     │   ├── code-architect.md
+    │   ├── code-refactorer.md
     │   ├── code-reviewer.md
-    │   ├── code-simplifier.md
     │   ├── code-tester.md
     │   ├── build-verificator.md
+    │   ├── mobile-architect.md
     │   ├── ux-optimiser.md
     │   └── technical-integration-architect.md
     └── specific/             # Specialized technology & domain agents
-        ├── ai-sdk-prompt-architect.md
-        ├── nextjs-fsd-developer.md
-        ├── flutter-ux-architect.md
-        └── ... (more specific agents)
+        ├── app-replication-architect.md
+        ├── dialogue-story-specialist.md
+        ├── fsd-architecture-specialist.md
+        ├── game-design-architect.md
+        ├── product-marketing-strategist.md
+        ├── psychology-consultant.md
+        └── startup-hub-agent.md
 ```
 
 ## Notes on MCP configuration
