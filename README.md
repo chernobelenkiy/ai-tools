@@ -170,6 +170,7 @@ After adding, use in Claude Code:
 ```
 /c-implement-feature path/to/feature-spec.md
 /c-implement-tdd-feature path/to/feature-spec.md
+/c-implement-bdd-feature path/to/feature-spec.md
 ```
 
 ---
@@ -311,11 +312,13 @@ echo 'export GITHUB_PERSONAL_ACCESS_TOKEN="your-token"' >> ~/.zshrc
 ```
 .
 ├── CLAUDE.md
-├── commands/            # Custom Claude Code orchestration workflows
-│   ├── c-implement-feature.md      # Full workflow: Plan → Implement → Test → Review
-│   ├── c-implement-tdd-feature.md  # TDD workflow: Plan → Test → Implement → Refactor
-│   ├── c-implement-s-feature.md    # Simple: Plan → Implement → Simplify
-│   └── c-implement-s-tdd-feature.md # Simple TDD: Plan → Test → Implement → Simplify
+├── commands/                # Custom Claude Code orchestration workflows
+│   ├── c-implement-feature.md           # Full: Plan → Implement → Test → Review
+│   ├── c-implement-tdd-feature.md       # TDD: Plan → Test → Implement → Refactor
+│   ├── c-implement-bdd-feature.md       # BDD: Plan → Gherkin+Tests → Implement
+│   ├── c-implement-s-feature.md         # Simple: Plan → Implement → Simplify
+│   ├── c-implement-s-tdd-feature.md     # Simple TDD: Plan → Test → Implement
+│   └── c-implement-s-bdd-feature.md     # Simple BDD: Plan → Gherkin+Tests → Implement
 ├── links.md
 ├── mcp/
 │   └── cursor.json

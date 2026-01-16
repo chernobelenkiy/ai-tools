@@ -37,8 +37,10 @@ Custom slash commands in `commands/` for orchestrated workflows:
 |---------|-------------|
 | `/c-implement-feature` | Full workflow: Plan → Implement → Test → Review → Verify |
 | `/c-implement-tdd-feature` | TDD workflow: Plan → **Test** → Implement → Refactor → Verify |
+| `/c-implement-bdd-feature` | BDD workflow: Plan → **Gherkin + Unit tests** → Implement → Verify |
 | `/c-implement-s-feature` | Simple: Plan → Implement → Simplify |
 | `/c-implement-s-tdd-feature` | Simple TDD: Plan → **Test** → Implement → Simplify |
+| `/c-implement-s-bdd-feature` | Simple BDD: Plan → **Gherkin + Tests** → Implement → Simplify |
 
 ## Key Conventions
 
