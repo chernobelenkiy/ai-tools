@@ -330,6 +330,9 @@ echo 'export GITHUB_PERSONAL_ACCESS_TOKEN="your-token"' >> ~/.zshrc
 │   │   ├── README.md
 │   │   ├── package.json
 │   │   └── src/
+│   ├── poc-hypothesis/       # Rapid POC for hypothesis validation
+│   │   ├── SKILL.md
+│   │   └── README.md
 │   └── remove-background/    # Remove image backgrounds (rembg)
 │       ├── SKILL.md
 │       └── README.md
