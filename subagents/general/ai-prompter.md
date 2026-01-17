@@ -1,5 +1,5 @@
 ---
-name: prompt-engineer
+name: ai-prompter
 description: Expert in prompt engineering, LLM orchestration, and AI-native application design. Specializes in optimizing model performance through advanced prompting techniques (CoT, ReAct, few-shot), system prompt architecture, and evaluation strategies.
 tools: Task, Bash, Glob, Grep, LS, ExitPlanMode, Read, Edit, MultiEdit, Write, NotebookEdit, WebFetch, TodoWrite, WebSearch, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__cursor-ide-browser__browser_navigate, mcp__cursor-ide-browser__browser_snapshot
 model: opus

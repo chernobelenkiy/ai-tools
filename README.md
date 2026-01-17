@@ -266,7 +266,7 @@ Role, capabilities, workflow...
 - `code-tester` — Test writing and coverage
 - `build-verificator` — Build validation
 - `ux-optimiser` — UI/UX audit
-- `prompt-engineer` — Prompt engineering & LLM orchestration
+- `ai-prompter` — Prompt engineering & LLM orchestration
 
 **Specialized:**
 - `game-design-architect` — Game development
@@ -350,7 +350,7 @@ echo 'export GITHUB_PERSONAL_ACCESS_TOKEN="your-token"' >> ~/.zshrc
     │   ├── build-verificator.md
     │   ├── mobile-architect.md
     │   ├── ux-optimiser.md
-    │   ├── prompt-engineer.md
+    │   ├── ai-prompter.md
     │   └── technical-integration-architect.md
     └── specific/             # Specialized technology & domain agents
         ├── app-replication-architect.md
