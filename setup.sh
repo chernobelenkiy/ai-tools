@@ -141,6 +141,7 @@ setup_commands() {
         "team-review:Командное ревью (Code Architect, UX, Sales, PM, Refactorer)"
         "playbook-generate:Генерация промптов и воркфлоу в Agents Playbook"
         "design-system:Создание и масштабирование дизайн-системы"
+        "prd-creation:Создание PRD для новой фичи"
     )
     
     for cmd_info in "${commands[@]}"; do
@@ -254,6 +255,7 @@ show_done() {
     echo -e "    ${CYAN}/team-review${NC} — командное ревью (Code Architect, UX, Sales, PM, Refactorer)"
     echo -e "    ${CYAN}/playbook-generate${NC} — генерация промптов и воркфлоу в Agents Playbook"
     echo -e "    ${CYAN}/design-system${NC} — создание и масштабирование дизайн-системы"
+    echo -e "    ${CYAN}/prd-creation${NC} — создание PRD для новой фичи"
     echo ""
     echo -e "  Запуск Claude Code:"
     echo -e "    ${CYAN}cd your-project && claude${NC}"

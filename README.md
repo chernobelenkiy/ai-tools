@@ -48,6 +48,7 @@ ai-tools/
 | `/team-review` | Командное ревью: Code Architect + UX + Sales + PM + Refactorer |
 | `/playbook-generate` | Генерация промпта/воркфлоу в Agents Playbook |
 | `/design-system` | Создание и масштабирование дизайн-системы |
+| `/prd-creation` | Создание PRD для новой фичи с участием PM |
 
 **Использование:**
 ```
