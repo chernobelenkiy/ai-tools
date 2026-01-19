@@ -1,88 +1,85 @@
-# ai-tools
+# 🤖 AI Tools
 
-A lightweight, opinionated collection of agent specs, rules, and links for building AI-assisted workflows. This repo focuses on clarity, interoperability (MCP), and pragmatic execution.
+Коллекция агентов, команд и MCP-серверов для Claude Code и Cursor.
 
-## What's inside
+## ⚡ Быстрый старт
 
-- `links.md` — Curated developer-oriented AI links
-- `subagents/` — Individual agent personas/specs
-- `skills/` — Reusable Claude Code skills with scripts (copy to your project's `.claude/skills/`)
-- `rules/` — Additional rules and guidelines (e.g., `rules/claude-rules.md`)
-- `commands/` — Custom slash commands for Claude Code workflows
-- `mcp/cursor.json` — Example MCP server configuration for local tooling
+```bash
+# Клонируй репозиторий
+git clone https://github.com/yourusername/ai-tools.git ~/projects/ai-tools
+
+# Запусти установку
+cd ~/projects/ai-tools
+./setup.sh
+```
+
+Скрипт установит:
+- ✅ MCP серверы (Context7, Playwright, GitHub...)
+- ✅ Команды для Claude Code
+- ✅ Скиллы (по выбору)
+
+Для быстрой установки без вопросов: `./setup.sh --quick`
 
 ---
 
-## Installing Claude Code
+## 📦 Что внутри
 
-### Via npm (recommended)
-
-```bash
-npm install -g @anthropic-ai/claude-code
 ```
-
-### Via Homebrew (macOS)
-
-```bash
-brew install claude-code
-```
-
-### Verify installation
-
-```bash
-claude --version
-```
-
-### Update to latest version
-
-```bash
-npm update -g @anthropic-ai/claude-code
-# or
-brew upgrade claude-code
+ai-tools/
+├── commands/      → Slash-команды для Claude Code
+├── subagents/     → Специализированные агенты
+├── skills/        → Исполняемые скиллы (скрипты)
+├── mcp/           → Конфиг MCP серверов
+└── rules/         → Правила и гайдлайны
 ```
 
 ---
 
-## Configuration Paths
+## 🚀 Команды
 
-Claude Code uses two configuration scopes:
+После установки в Claude Code доступны команды:
 
-| Scope | Path | Purpose |
-|-------|------|---------|
-| **User-level** | `~/.claude/` | Global settings, MCP servers, commands available everywhere |
-| **Project-level** | `.claude/` (in project root) | Project-specific commands, skills, settings |
+| Команда | Что делает |
+|---------|------------|
+| `/c-implement-feature` | Полный цикл: Plan → Implement → Test → Review |
+| `/c-implement-tdd-feature` | TDD: Plan → **Test** → Implement → Refactor |
+| `/c-implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
+| `/c-implement-s-feature` | Простой: Plan → Implement → Simplify |
+| `/c-implement-s-tdd-feature` | Простой TDD |
+| `/c-implement-s-bdd-feature` | Простой BDD |
 
-Key files:
-- `~/.claude/settings.json` — Global MCP servers, permissions
-- `.claude/settings.json` — Project MCP servers, settings override
-- `.claude/commands/` — Custom slash commands
-- `.claude/skills/` — Executable skill scripts
+**Использование:**
+```
+/c-implement-feature описание фичи или путь к спеке
+```
 
 ---
 
-## Adding MCP Servers
+## 🔌 MCP Серверы
 
-MCP servers extend Claude Code with external tools (GitHub, Figma, databases, etc.).
+Установленные серверы:
 
-### Option 1: Edit settings.json directly
+| Сервер | Для чего |
+|--------|----------|
+| **Context7** | Актуальная документация библиотек |
+| **Playwright** | Браузерное тестирование |
+| **GitHub** | Работа с репозиториями |
+| **Sentry** | Мониторинг ошибок |
+| **Vercel** | Деплой |
+| **Supabase** | База данных |
 
-**Global (all projects):**
+### Ручная настройка MCP
+
+Если нужно добавить сервер вручную:
 
 ```bash
-# Open or create the settings file
-mkdir -p ~/.claude
-nano ~/.claude/settings.json
+# Через CLI
+claude mcp add context7 --url https://mcp.context7.com/mcp
+
+# Или редактируй ~/.claude/settings.json
 ```
 
-**Project-level:**
-
-```bash
-mkdir -p .claude
-nano .claude/settings.json
-```
-
-Add servers in this format:
-
+Формат `settings.json`:
 ```json
 {
   "mcpServers": {
@@ -90,288 +87,127 @@ Add servers in this format:
       "url": "https://mcp.context7.com/mcp"
     },
     "Playwright": {
-      "command": "npx -y @modelcontextprotocol/server-playwright",
-      "env": {}
-    },
-    "GitHub": {
-      "command": "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server",
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      }
+      "command": "npx -y @modelcontextprotocol/server-playwright"
     }
   }
 }
 ```
 
-### Option 2: Copy from this repo
+---
 
-```bash
-# Copy example MCP config as a starting point
-cp mcp/cursor.json ~/.claude/settings.json
+## 🤖 Агенты
+
+Специализированные агенты в `subagents/`:
+
+**Общие:**
+- `code-architect` — Full-stack разработка
+- `code-reviewer` — Ревью кода
+- `code-tester` — Написание тестов
+- `code-refactorer` — Рефакторинг
+- `ux-optimiser` — UX/UI аудит
+- `ai-prompter` — Промпт-инжиниринг
+
+**Специализированные:**
+- `game-design-architect` — Геймдев
+- `fsd-architecture-specialist` — Feature-Sliced Design
+- `dialogue-story-specialist` — Нарратив и диалоги
+
+Использование в Claude Code:
 ```
-
-Then edit to keep only the servers you need and add your tokens.
-
-### Option 3: Via Claude Code CLI
-
-```bash
-claude mcp add context7 --url https://mcp.context7.com/mcp
-claude mcp add playwright --command "npx -y @modelcontextprotocol/server-playwright"
+Используй агента code-reviewer из ~/projects/ai-tools/subagents/general/code-reviewer.md
 ```
-
-### Server types
-
-| Type | Config key | Example |
-|------|------------|---------|
-| **HTTP/SSE** | `url` | `"url": "https://mcp.context7.com/mcp"` |
-| **Stdio** | `command` | `"command": "npx -y @some/mcp-server"` |
-| **With env vars** | `env` | `"env": { "API_KEY": "${API_KEY}" }` |
 
 ---
 
-## Adding Commands
+## 🛠 Скиллы
 
-Commands are custom slash commands (e.g., `/implement-feature`) that orchestrate multi-step workflows.
+Исполняемые скрипты в `skills/`:
 
-### Option 1: Copy to user-level (available globally)
+| Скилл | Описание |
+|-------|----------|
+| `create-game-assets` | Генерация ассетов через DALL-E 3 |
+| `unity-assets` | Unity материалы, шейдеры, префабы |
+| `poc-hypothesis` | Быстрый POC для проверки гипотез |
+| `remove-background` | Удаление фона с изображений |
 
+Установка отдельного скилла:
+```bash
+cp -r skills/create-game-assets ~/.claude/skills/
+cd ~/.claude/skills/create-game-assets && npm install
+```
+
+---
+
+## ⚙️ Переменные окружения
+
+Добавь в `~/.zshrc`:
+
+```bash
+# GitHub MCP (обязательно для GitHub сервера)
+export GITHUB_PERSONAL_ACCESS_TOKEN="ghp_..."
+
+# OpenAI (для скиллов с генерацией)
+export OPENAI_API_KEY="sk-..."
+
+# Supabase (опционально)
+export SUPABASE_API_URL="https://xxx.supabase.co/rest/v1"
+export SUPABASE_ANON_KEY="your-key"
+```
+
+---
+
+## 📁 Структура конфигов
+
+| Путь | Назначение |
+|------|------------|
+| `~/.claude/settings.json` | MCP серверы (глобально) |
+| `~/.claude/commands/` | Slash-команды (глобально) |
+| `~/.claude/skills/` | Скиллы (глобально) |
+| `.claude/settings.json` | MCP серверы (проект) |
+| `.claude/commands/` | Команды (проект) |
+
+---
+
+## 🔧 Ручная установка
+
+Если не хочешь использовать скрипт:
+
+### MCP
+```bash
+cp mcp/cursor.json ~/.claude/settings.json
+```
+
+### Команды
 ```bash
 mkdir -p ~/.claude/commands
 cp commands/*.md ~/.claude/commands/
 ```
 
-### Option 2: Copy to project-level
-
+### Скиллы
 ```bash
-mkdir -p .claude/commands
-cp /path/to/ai-tools/commands/*.md .claude/commands/
-```
-
-### Command format
-
-Commands are Markdown files with YAML frontmatter:
-
-```markdown
----
-name: my-command
-description: What this command does
-allowed-tools: Task, Read, Edit, Write, Bash
----
-
-# Instructions for Claude
-
-Your workflow steps here...
-```
-
-### Usage
-
-After adding, use in Claude Code:
-
-```
-/c-implement-feature path/to/feature-spec.md
-/c-implement-tdd-feature path/to/feature-spec.md
-/c-implement-bdd-feature path/to/feature-spec.md
-```
-
----
-
-## Adding Skills
-
-Skills are executable scripts that Claude Code can run (image generation, API calls, etc.).
-
-### Option 1: Copy skill folder to project
-
-```bash
-mkdir -p .claude/skills
-cp -r /path/to/ai-tools/skills/create-game-assets .claude/skills/
-
-# Install dependencies
-cd .claude/skills/create-game-assets
-npm install
-```
-
-### Option 2: Symlink for development
-
-```bash
-mkdir -p .claude/skills
-ln -s /path/to/ai-tools/skills/create-game-assets .claude/skills/create-game-assets
-```
-
-### Skill structure
-
-Each skill folder contains:
-
-```
-skill-name/
-├── SKILL.md      # Instructions for Claude (when/how to use)
-├── README.md     # Human documentation
-├── package.json  # Dependencies
-└── src/          # Executable scripts
-```
-
-### Required env vars
-
-Set environment variables for skills that need them:
-
-```bash
-export OPENAI_API_KEY="sk-..."  # For create-game-assets
-```
-
----
-
-## Adding Subagents
-
-Subagents are specialized agent personas used with Claude Code's `Task` tool for orchestration.
-
-### Option 1: Reference directly (recommended)
-
-Point Claude to the subagent file when needed:
-
-```
-Use the code-architect agent from /path/to/ai-tools/subagents/general/code-architect.md
-```
-
-### Option 2: Copy to project
-
-```bash
-mkdir -p .claude/agents
-cp /path/to/ai-tools/subagents/general/*.md .claude/agents/
-cp /path/to/ai-tools/subagents/specific/*.md .claude/agents/
-```
-
-### Subagent format
-
-Subagents are Markdown files with YAML frontmatter:
-
-```markdown
----
-name: agent-name
-description: One-line description
-tools: Task, Read, Edit, Write, Bash, mcp__context7__query-docs
-model: opus
-color: cyan
----
-
-# Agent instructions
-
-Role, capabilities, workflow...
-```
-
-### Available subagents
-
-**General-purpose:**
-- `code-architect` — Full-stack implementation
-- `code-refactorer` — Code quality improvements
-- `code-reviewer` — PR review and feedback
-- `code-tester` — Test writing and coverage
-- `build-verificator` — Build validation
-- `ux-optimiser` — UI/UX audit
-- `ai-prompter` — Prompt engineering & LLM orchestration
-
-**Specialized:**
-- `game-design-architect` — Game development
-- `fsd-architecture-specialist` — Feature-Sliced Design
-- `startup-hub-agent` — Startup tooling
-
----
-
-## Quick Setup (Copy Everything)
-
-To set up all configurations at once:
-
-```bash
-# Clone the repo
-git clone https://github.com/yourusername/ai-tools.git ~/projects/ai-tools
-
-# Create Claude config directory
-mkdir -p ~/.claude/{commands,skills}
-
-# Copy MCP config (edit to add your tokens)
-cp ~/projects/ai-tools/mcp/cursor.json ~/.claude/settings.json
-
-# Copy all commands
-cp ~/projects/ai-tools/commands/*.md ~/.claude/commands/
-
-# Copy skills you need
-cp -r ~/projects/ai-tools/skills/create-game-assets ~/.claude/skills/
+mkdir -p ~/.claude/skills
+cp -r skills/create-game-assets ~/.claude/skills/
 cd ~/.claude/skills/create-game-assets && npm install
-
-# Set required env vars in your shell profile
-echo 'export OPENAI_API_KEY="your-key"' >> ~/.zshrc
-echo 'export GITHUB_PERSONAL_ACCESS_TOKEN="your-token"' >> ~/.zshrc
 ```
 
 ---
 
-## Quick start
+## 📝 Ключевые принципы
 
-1. Follow `CLAUDE.md` for interaction style and output quality when using Claude.
-2. Use `links.md` to quickly jump to provider docs, SDKs, and tooling.
+1. **Планирование** — агенты задают вопросы перед реализацией
+2. **Аудит** — поиск существующих решений перед созданием новых
+3. **Без заглушек** — полная реализация или явный запрос на отсрочку
+4. **Минимальные изменения** — точные фиксы без over-engineering
+5. **Context7** — актуальная документация через MCP
 
-## Repo structure
+---
 
-```
-.
-├── CLAUDE.md
-├── commands/                # Custom Claude Code orchestration workflows
-│   ├── c-implement-feature.md           # Full: Plan → Implement → Test → Review
-│   ├── c-implement-tdd-feature.md       # TDD: Plan → Test → Implement → Refactor
-│   ├── c-implement-bdd-feature.md       # BDD: Plan → Gherkin+Tests → Implement
-│   ├── c-implement-s-feature.md         # Simple: Plan → Implement → Simplify
-│   ├── c-implement-s-tdd-feature.md     # Simple TDD: Plan → Test → Implement
-│   └── c-implement-s-bdd-feature.md     # Simple BDD: Plan → Gherkin+Tests → Implement
-├── links.md
-├── mcp/
-│   └── cursor.json
-├── rules/
-│   └── claude-rules.md
-├── skills/
-│   ├── create-game-assets/   # DALL-E 3 game asset generator
-│   │   ├── SKILL.md
-│   │   ├── README.md
-│   │   ├── package.json
-│   │   └── src/
-│   ├── implement-tdd-feature/ # TDD workflow: tests first, then implementation
-│   │   ├── SKILL.md
-│   │   └── README.md
-│   ├── poc-hypothesis/       # Rapid POC for hypothesis validation
-│   │   ├── SKILL.md
-│   │   └── README.md
-│   └── remove-background/    # Remove image backgrounds (rembg)
-│       ├── SKILL.md
-│       └── README.md
-└── subagents/
-    ├── general/              # Core development & management agents
-    │   ├── project-manager.md
-    │   ├── code-architect.md
-    │   ├── code-refactorer.md
-    │   ├── code-reviewer.md
-    │   ├── code-tester.md
-    │   ├── build-verificator.md
-    │   ├── mobile-architect.md
-    │   ├── ux-optimiser.md
-    │   ├── ai-prompter.md
-    │   └── technical-integration-architect.md
-    └── specific/             # Specialized technology & domain agents
-        ├── app-replication-architect.md
-        ├── dialogue-story-specialist.md
-        ├── fsd-architecture-specialist.md
-        ├── game-design-architect.md
-        ├── product-marketing-strategist.md
-        ├── psychology-consultant.md
-        └── startup-hub-agent.md
-```
+## 📚 Полезные ссылки
 
-## Notes on MCP configuration
+Смотри `links.md` для ссылок на документацию провайдеров, SDK и инструменты.
 
-- `mcp/cursor.json` is provided as an example. Ensure you manage tokens via environment variables or your editor’s secrets manager. Avoid committing credentials.
-
-## Contributing
-
-- Keep edits minimal, documented, and aligned with existing patterns.
-- Prefer updating `AGENTS.md` and `CLAUDE.md` when adding agents or guidelines.
-- Validate links in `links.md` when updating categories.
+---
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+MIT — смотри `LICENSE`
