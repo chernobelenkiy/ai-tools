@@ -66,6 +66,7 @@ The `build-verificator` agent performs the final audit as described in each work
 | **Verification Gate** | Never mark a task as "Done" without a successful Build Verification Report. |
 | **Sequential Phases** | Complete each phase fully before moving to the next. |
 | **Audit First** | Always check for existing code to reuse before writing new logic. |
+| **POC First** | If hypothesis is dubious or confidence is low, prioritize creating a POC first. |
 
 ## Examples
 

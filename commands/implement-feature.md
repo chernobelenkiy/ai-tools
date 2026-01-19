@@ -20,6 +20,7 @@ Before creating or executing any implementation plan, the following constraints 
 4. **Map integration surfaces** — Identify how new code connects to existing systems. Verify APIs, props, and data flows before implementation.
 5. **Context Intake** — Gather all requirements, design links, and chat history containing recommendations from other agents involved in the project.
 6. **Explicit Approval** — Present the plan to the user and wait for explicit approval before proceeding to implementation phases.
+7. **POC First** — If the hypothesis is dubious or the technical confidence level is low, prioritize creating a Proof of Concept (POC) using the `poc-hypothesis` skill to validate the approach before full implementation.
 
 ### Planning Tasks
 1. **Spawn plan agent** to:
