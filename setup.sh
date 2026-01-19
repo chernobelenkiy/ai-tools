@@ -159,10 +159,8 @@ setup_skills() {
     
     local skills=(
         "create-game-assets:Генерация игровых ассетов (DALL-E 3)"
-        "unity-assets:Unity ассеты (материалы, шейдеры)"
+        "feature-implementation:Полный цикл разработки (Standard, TDD, BDD)"
         "poc-hypothesis:Быстрый POC для проверки гипотез"
-        "implement-tdd-feature:TDD workflow"
-        "remove-background:Удаление фона с изображений"
         "integrate-playbook-mcp:Интеграция Playbook MCP"
     )
     
@@ -184,7 +182,7 @@ setup_skills() {
     fi
     
     if [ "$skill_choice" = "a" ]; then
-        skill_choice="1 2 3 4 5 6"
+        skill_choice="1 2 3 4"
     fi
     
     for num in $skill_choice; do
@@ -247,6 +245,7 @@ show_done() {
     echo -e "  Теперь в Claude Code доступны команды:"
     echo -e "    ${CYAN}/implement-feature${NC} — полный цикл разработки"
     echo -e "    ${CYAN}/implement-tdd-feature${NC} — TDD workflow"
+    echo -e "    ${CYAN}/implement-bdd-feature${NC} — BDD workflow"
     echo ""
     echo -e "  Запуск Claude Code:"
     echo -e "    ${CYAN}cd your-project && claude${NC}"
