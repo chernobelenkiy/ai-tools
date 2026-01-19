@@ -137,6 +137,10 @@ setup_commands() {
         "implement-feature:Полный цикл разработки"
         "implement-tdd-feature:TDD: сначала тесты"
         "implement-bdd-feature:BDD: Gherkin + тесты"
+        "business-review:Бизнес и маркетинг ревью"
+        "team-review:Командное ревью (Code Architect, UX, Sales, PM, Refactorer)"
+        "playbook-generate:Генерация промптов и воркфлоу в Agents Playbook"
+        "design-system:Создание и масштабирование дизайн-системы"
     )
     
     for cmd_info in "${commands[@]}"; do
@@ -246,6 +250,10 @@ show_done() {
     echo -e "    ${CYAN}/implement-feature${NC} — полный цикл разработки"
     echo -e "    ${CYAN}/implement-tdd-feature${NC} — TDD workflow"
     echo -e "    ${CYAN}/implement-bdd-feature${NC} — BDD workflow"
+    echo -e "    ${CYAN}/business-review${NC} — бизнес и маркетинг ревью"
+    echo -e "    ${CYAN}/team-review${NC} — командное ревью (Code Architect, UX, Sales, PM, Refactorer)"
+    echo -e "    ${CYAN}/playbook-generate${NC} — генерация промптов и воркфлоу в Agents Playbook"
+    echo -e "    ${CYAN}/design-system${NC} — создание и масштабирование дизайн-системы"
     echo ""
     echo -e "  Запуск Claude Code:"
     echo -e "    ${CYAN}cd your-project && claude${NC}"

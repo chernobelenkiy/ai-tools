@@ -44,6 +44,10 @@ ai-tools/
 | `/implement-feature` | Полный цикл: Plan → Implement → Test → Review |
 | `/implement-tdd-feature` | TDD: Plan → **Test** → Implement → Refactor |
 | `/implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
+| `/business-review` | Бизнес и маркетинг ревью: PRD → Анализ → Вердикт |
+| `/team-review` | Командное ревью: Code Architect + UX + Sales + PM + Refactorer |
+| `/playbook-generate` | Генерация промпта/воркфлоу в Agents Playbook |
+| `/design-system` | Создание и масштабирование дизайн-системы |
 
 **Использование:**
 ```
@@ -98,10 +102,10 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 
 **Общие:**
 - `code-architect` — Full-stack разработка
-- `code-reviewer` — Ревью кода
 - `code-tester` — Написание тестов
 - `code-refactorer` — Рефакторинг
 - `ux-optimiser` — UX/UI аудит
+- `sales-marketer` — Маркетинг и продажи
 - `ai-prompter` — Промпт-инжиниринг
 
 **Специализированные:**
@@ -111,7 +115,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 
 Использование в Claude Code:
 ```
-Используй агента code-reviewer из ~/projects/ai-tools/subagents/general/code-reviewer.md
+Используй агента code-architect из ~/projects/ai-tools/subagents/general/code-architect.md
 ```
 
 ---
