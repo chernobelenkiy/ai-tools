@@ -134,12 +134,9 @@ setup_commands() {
     print_step "Устанавливаю команды..."
     
     local commands=(
-        "c-implement-feature:Полный цикл разработки"
-        "c-implement-tdd-feature:TDD: сначала тесты"
-        "c-implement-bdd-feature:BDD: Gherkin + тесты"
-        "c-implement-s-feature:Простая реализация"
-        "c-implement-s-tdd-feature:Простой TDD"
-        "c-implement-s-bdd-feature:Простой BDD"
+        "implement-feature:Полный цикл разработки"
+        "implement-tdd-feature:TDD: сначала тесты"
+        "implement-bdd-feature:BDD: Gherkin + тесты"
     )
     
     for cmd_info in "${commands[@]}"; do
@@ -248,8 +245,8 @@ show_done() {
     echo -e "${GREEN}╰─────────────────────────────────────────────────╯${NC}"
     echo ""
     echo -e "  Теперь в Claude Code доступны команды:"
-    echo -e "    ${CYAN}/c-implement-feature${NC} — полный цикл разработки"
-    echo -e "    ${CYAN}/c-implement-tdd-feature${NC} — TDD workflow"
+    echo -e "    ${CYAN}/implement-feature${NC} — полный цикл разработки"
+    echo -e "    ${CYAN}/implement-tdd-feature${NC} — TDD workflow"
     echo ""
     echo -e "  Запуск Claude Code:"
     echo -e "    ${CYAN}cd your-project && claude${NC}"
@@ -314,7 +311,7 @@ show_help() {
     echo "  Что устанавливается:"
     echo ""
     echo "    • MCP серверы (Context7, Playwright, GitHub...)"
-    echo "    • Команды (/c-implement-feature, /c-implement-tdd-feature...)"
+    echo "    • Команды (/implement-feature, /implement-tdd-feature...)"
     echo "    • Скиллы (генерация ассетов, TDD workflow...)"
     echo ""
 }

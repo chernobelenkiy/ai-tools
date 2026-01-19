@@ -41,16 +41,13 @@ ai-tools/
 
 | Команда | Что делает |
 |---------|------------|
-| `/c-implement-feature` | Полный цикл: Plan → Implement → Test → Review |
-| `/c-implement-tdd-feature` | TDD: Plan → **Test** → Implement → Refactor |
-| `/c-implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
-| `/c-implement-s-feature` | Простой: Plan → Implement → Simplify |
-| `/c-implement-s-tdd-feature` | Простой TDD |
-| `/c-implement-s-bdd-feature` | Простой BDD |
+| `/implement-feature` | Полный цикл: Plan → Implement → Test → Review |
+| `/implement-tdd-feature` | TDD: Plan → **Test** → Implement → Refactor |
+| `/implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
 
 **Использование:**
 ```
-/c-implement-feature описание фичи или путь к спеке
+/implement-feature описание фичи или путь к спеке
 ```
 
 ---
@@ -125,6 +122,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 
 | Скилл | Описание |
 |-------|----------|
+| `feature-implementation` | Полный цикл разработки (Standard, TDD, BDD) |
 | `create-game-assets` | Генерация ассетов через DALL-E 3 |
 | `unity-assets` | Unity материалы, шейдеры, префабы |
 | `poc-hypothesis` | Быстрый POC для проверки гипотез |
