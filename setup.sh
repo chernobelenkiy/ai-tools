@@ -167,6 +167,7 @@ setup_skills() {
         "feature-implementation:Полный цикл разработки (Standard, TDD, BDD)"
         "poc-hypothesis:Быстрый POC для проверки гипотез"
         "integrate-playbook-mcp:Интеграция Playbook MCP"
+        "agent-browser:Автоматизация браузера"
     )
     
     local i=1

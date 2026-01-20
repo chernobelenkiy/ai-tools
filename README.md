@@ -107,6 +107,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 - `code-refactorer` — Рефакторинг
 - `ux-optimiser` — UX/UI аудит
 - `sales-marketer` — Маркетинг и продажи
+- `agent-browser` — Автоматизация браузера
 - `ai-prompter` — Промпт-инжиниринг
 
 **Специализированные:**
@@ -132,6 +133,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 | `unity-assets` | Unity материалы, шейдеры, префабы |
 | `poc-hypothesis` | Быстрый POC для проверки гипотез |
 | `remove-background` | Удаление фона с изображений |
+| `agent-browser` | Автоматизация браузера |
 
 Установка отдельного скилла:
 ```bash
