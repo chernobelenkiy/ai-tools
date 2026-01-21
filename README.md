@@ -46,7 +46,6 @@ ai-tools/
 | `/implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
 | `/business-review` | Бизнес и маркетинг ревью: PRD → Анализ → Вердикт |
 | `/team-review` | Командное ревью: Code Architect + UX + Sales + PM + Refactorer |
-| `/playbook-generate` | Генерация промпта/воркфлоу в Agents Playbook |
 | `/design-system` | Создание и масштабирование дизайн-системы |
 | `/prd-creation` | Создание PRD для новой фичи с участием PM |
 
@@ -120,7 +119,6 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 | `ai-prompter` | Промпт-инжиниринг и AI архитектура |
 | `build-verificator` | Финальная QA верификация и тестирование |
 | `mobile-architect` | Flutter и кросс-платформенная мобильная разработка |
-| `playbooker` | Интеграция MCP и оркестрация AI воркфлоу |
 | `project-manager` | Декомпозиция задач и планирование (P0-P2, T-shirt sizing) |
 
 ### Специализированные (specific/)
@@ -133,7 +131,6 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 | `app-replication-architect` | Анализ и стратегия репликации приложений |
 | `product-marketing-strategist` | Анализ фидбэка и позиционирование продукта |
 | `psychology-consultant` | Консультации по mental health фичам |
-| `startup-hub-agent` | Исследование стартапов и управление проектами |
 
 Использование в Claude Code:
 ```
@@ -154,6 +151,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 | `agent-browser` | Автоматизация браузера |
 | `integrate-playbook-mcp` | Интеграция Agents Playbook MCP в AI фреймворки |
 | `humanizer` | Удаление признаков AI-текста, улучшение стиля |
+| `startup-hub` | Исследование стартапов и управление проектами в Startup Hub |
 
 Установка отдельного скилла:
 ```bash

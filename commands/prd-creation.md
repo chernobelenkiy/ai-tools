@@ -1,8 +1,7 @@
 ---
 name: prd-creation
 description: Create a comprehensive Product Requirements Document (PRD) for a new feature with Project Manager assistance.
-allowed-tools: Task, Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, TodoWrite
-model: sonnet
+allowed-tools: Task, Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, TodoWrite, mcp__stitch__create_project, mcp__stitch__generate_screen_from_text, mcp__stitch__list_screens, mcp__stitch__get_screen
 ---
 
 # PRD Creation Workflow
@@ -27,6 +26,14 @@ You are orchestrating the creation of a Product Requirements Document (PRD). You
    - Topics to cover: Target audience, core user stories (JTBD), functional requirements, non-functional requirements (performance, security), and success metrics.
    - Identify potential edge cases and out-of-scope items.
 
+2. **Design Resource Check**:
+   - **Ask the user**: "Do you have existing designs for this feature (Figma, mockups, wireframes)?"
+   - **If designs exist**: Request the Figma link or design reference to include in the PRD.
+   - **If no designs exist**: Suggest using **Stitch MCP** to generate UI mockups from the requirements:
+     - Use `mcp__stitch__create_project` to create a design project for the feature.
+     - Use `mcp__stitch__generate_screen_from_text` to generate initial UI concepts based on user stories and requirements.
+     - Include generated design references in the PRD for implementation guidance.
+
 ## Phase 3: Drafting the PRD
 
 1. **Document Structure**:
@@ -36,7 +43,7 @@ You are orchestrating the creation of a Product Requirements Document (PRD). You
    - **User Stories**: "As a [user], I want to [action], so that [benefit]."
    - **Functional Requirements**: Detailed list of what the feature *must* do.
    - **Technical Constraints**: Integration points, data models, and performance targets (informed by Phase 1).
-   - **UI/UX Requirements**: Key interactions and visual expectations.
+   - **UI/UX Requirements**: Key interactions and visual expectations. Link to Figma designs or Stitch-generated mockups.
    - **Phasing & MVP**: What goes into the first release vs. later.
    - **Success Metrics**: How will we know it's working?
 

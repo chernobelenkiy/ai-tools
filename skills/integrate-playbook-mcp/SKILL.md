@@ -101,4 +101,4 @@ const client = new MultiServerMCPClient({
 "Set up a Cursor project that uses my Agents Playbook workflows via MCP."
 1. Configure Cursor to point to the local or remote MCP endpoint.
 2. Use the `get_available_workflows` tool to list existing patterns.
-3. Map a `playbooker` persona to orchestrate the implementation.
+3. Follow the workflow stages to orchestrate the implementation.

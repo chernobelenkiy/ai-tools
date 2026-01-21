@@ -2,7 +2,6 @@
 name: design-system
 description: Framework for building and scaling a design system (Tokens, Components, Patterns, Docs).
 allowed-tools: Task, Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, TodoWrite, mcp__Figma__get_design_context, mcp__Figma__get_metadata, mcp__Figma__get_screenshot
-model: sonnet
 ---
 
 # Design System Framework Workflow
