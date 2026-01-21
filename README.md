@@ -153,6 +153,7 @@ claude mcp add context7 --url https://mcp.context7.com/mcp
 | `poc-hypothesis` | Быстрый POC для проверки гипотез |
 | `agent-browser` | Автоматизация браузера |
 | `integrate-playbook-mcp` | Интеграция Agents Playbook MCP в AI фреймворки |
+| `humanizer` | Удаление признаков AI-текста, улучшение стиля |
 
 Установка отдельного скилла:
 ```bash
