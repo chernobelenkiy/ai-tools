@@ -1,0 +1,10 @@
+{
+  "name": "ai-tools",
+  "version": "1.0.0",
+  "description": "AI agent specifications, rules, and curated links for building AI-assisted workflows",
+  "scripts": {
+    "stitch:refresh-token": "./mcp/stitch/refresh-token.sh",
+    "stitch:refresh-token:export": "./mcp/stitch/refresh-token.sh --export"
+  },
+  "private": true
+}
