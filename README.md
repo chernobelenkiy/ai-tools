@@ -44,6 +44,8 @@ After installation, the following commands are available in Claude Code:
 | `/implement-feature` | Full cycle: Plan → Implement → Test → Review |
 | `/implement-tdd-feature` | TDD: Plan → **Test** → Implement → Refactor |
 | `/implement-bdd-feature` | BDD: Plan → **Gherkin** → Implement |
+| `/test-code` | Analyze code, write tests (Playwright/Jest/Vitest), validate business logic |
+| `/refactor-code` | Review and simplify code for readability and scalability |
 | `/business-review` | Business & marketing review: PRD → Analysis → Verdict |
 | `/team-review` | Team review: Code Architect + UX + Sales + PM + Refactorer |
 | `/design-system` | Create and scale a design system |

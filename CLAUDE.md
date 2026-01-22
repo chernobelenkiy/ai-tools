@@ -38,6 +38,8 @@ Custom slash commands in `commands/` for orchestrated workflows:
 | `/implement-feature` | Full workflow: Plan → Implement → Test → Review → Verify |
 | `/implement-tdd-feature` | TDD workflow: Plan → **Test** → Implement → Refactor → Verify |
 | `/implement-bdd-feature` | BDD workflow: Plan → **Gherkin + Unit tests** → Implement → Verify |
+| `/test-code` | Analyze code, write tests (Playwright/Jest/Vitest), validate logic |
+| `/refactor-code` | Simplify code for readability and scalability |
 
 ## Key Conventions
 

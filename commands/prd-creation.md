@@ -1,7 +1,7 @@
 ---
 name: prd-creation
 description: Create a comprehensive Product Requirements Document (PRD) for a new feature with Project Manager assistance.
-allowed-tools: Task, Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, TodoWrite, mcp__stitch__create_project, mcp__stitch__generate_screen_from_text, mcp__stitch__list_screens, mcp__stitch__get_screen
+allowed-tools: Task, Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, TodoWrite, mcp__stitch__create_project, mcp__stitch__generate_screen_from_text, mcp__stitch__list_screens, mcp__stitch__get_screen, mcp__user-Figma__get_design_context, mcp__user-Figma__get_screenshot, mcp__user-Figma__get_metadata
 ---
 
 # PRD Creation Workflow
@@ -28,7 +28,12 @@ You are orchestrating the creation of a Product Requirements Document (PRD). You
 
 2. **Design Resource Check**:
    - **Ask the user**: "Do you have existing designs for this feature (Figma, mockups, wireframes)?"
-   - **If designs exist**: Request the Figma link or design reference to include in the PRD.
+   - **If Figma designs exist**: Use **Figma MCP** to extract design context:
+     - Request the Figma URL from the user (format: `https://figma.com/design/:fileKey/:fileName?node-id=X-Y`).
+     - Use `mcp__user-Figma__get_screenshot` to capture visual reference of the design.
+     - Use `mcp__user-Figma__get_design_context` to extract UI structure and generate implementation hints.
+     - Use `mcp__user-Figma__get_metadata` to get component names, variants, and design tokens.
+     - Include extracted design context and screenshots in the PRD for implementation guidance.
    - **If no designs exist**: Suggest using **Stitch MCP** to generate UI mockups from the requirements:
      - Use `mcp__stitch__create_project` to create a design project for the feature.
      - Use `mcp__stitch__generate_screen_from_text` to generate initial UI concepts based on user stories and requirements.
