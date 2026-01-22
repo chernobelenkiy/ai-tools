@@ -30,14 +30,10 @@
       "headers": {}
     },
     "stitch": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://stitch.googleapis.com/v1alpha/mcp:streamableHttp"
-      ],
-      "env": {
-        "MCP_HEADERS": "Authorization: Bearer ${STITCH_ACCESS_TOKEN},x-goog-user-project: ${GCLOUD_PROJECT_ID}"
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "Authorization": "Bearer [YOUR_STITCH_ACCESS_TOKEN]",
+        "X-Goog-User-Project": "[YOUR_PROJECT_ID]"
       }
     }
   }
