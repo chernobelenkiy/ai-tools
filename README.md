@@ -47,6 +47,7 @@ After installation, the following commands are available in Claude Code:
 | `/test-code` | Analyze code, write tests (Playwright/Jest/Vitest), validate business logic |
 | `/refactor-code` | Review and simplify code for readability and scalability |
 | `/business-review` | Business & marketing review: PRD → Analysis → Verdict |
+| `/design-review` | Comprehensive design review: Audit → Critique → Optimize |
 | `/team-review` | Team review: Code Architect + UX + Sales + PM + Refactorer |
 | `/design-system` | Create and scale a design system |
 | `/prd-creation` | Create PRD for a new feature with PM involvement |
