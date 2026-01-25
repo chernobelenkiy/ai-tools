@@ -1327,6 +1327,117 @@ Both converge on: agentic loop, tool calling, prompt caching, context management
 
 ---
 
+### OpenManus: Hierarchical Agent Framework
+
+**Third production approach:** MetaGPT's OpenManus uses hierarchical agent structure + graph-based workflows.
+
+**Agent Hierarchy (Progressive Specialization):**
+
+```
+ToolCallAgent (base)
+    ↓
+PlanningAgent (adds task decomposition)
+    ↓
+ReActAgent (adds think-act-observe loop)
+    ↓
+Manus (main orchestrator)
+```
+
+**Three-Prompt Pattern:**
+
+1. **System Prompts** - Define role and capability scope
+   ```markdown
+   You are [role].
+   
+   Capabilities:
+   - Tool 1: [when to use]
+   - Tool 2: [when to use]
+   
+   Constraints:
+   - Verify before changes
+   - Break complex into steps
+   ```
+
+2. **Step Prompts** - Guide current action
+   ```markdown
+   Current Step: [name]
+   Objective: [what to accomplish]
+   Available Tools: [relevant tools]
+   Previous Context: [summary]
+   ```
+
+3. **Planning Prompts** - Enable task decomposition
+   ```markdown
+   Break this into:
+   1. Subtasks with objectives
+   2. Dependencies
+   3. Required tools
+   4. Success criteria
+   ```
+
+**Graph-Based Workflows:**
+
+```python
+workflow = {
+    "start": {"agent": "PlanningAgent", "next": "execute"},
+    "execute": {"agent": "ReActAgent", "next": ["verify", "error"]},
+    "verify": {"agent": "ToolCallAgent", "next": "end"},
+    "error": {"agent": "ReActAgent", "next": "execute"}
+}
+```
+
+**Benefits:**
+- Visual representation of flow
+- Built-in error handling paths
+- Supports loops and branches
+- Easy to modify/extend
+
+**Think-Act-Observe Loop (ReActAgent):**
+
+```
+1. Think: Reason about state and next action
+2. Act: Execute tool call
+3. Observe: Process results, update understanding
+→ Repeat until complete
+```
+
+**Tool Organization:**
+
+```
+/tools/
+  execution/  (bash, python)
+  web/        (browser, search)
+  files/      (read, write, edit)
+  planning/   (plan, decompose)
+```
+
+**Key differences:**
+- **vs Codex**: Hierarchical agents vs flat tools
+- **vs Claude Code**: Graph coordination vs extension layers
+- Built-in planning vs external planning tools
+
+**Combination patterns:**
+
+```python
+# OpenManus + Codex
+system: [Codex role hierarchy]
+user: [OpenManus system prompt]
+→ Step prompts with Codex XML tags
+
+# OpenManus + Claude Code
+CLAUDE.md = System prompts
+Skills = Step prompt templates
+Subagents = ReActAgent instances
+```
+
+**Best practices:**
+- ✅ Progressive specialization (not flat monolith)
+- ✅ Separate prompt types by purpose
+- ✅ Explicit workflow graphs (not implicit flow)
+- ✅ Categorize tools by domain
+
+---
+
 ### Advanced Agent Topics (2026)
 
 **Multi-Agent Orchestration Patterns:**
@@ -1789,8 +1900,8 @@ For each dimension, provide:
 ### Agent Research & Production Insights (2026)
 
 **Comprehensive Research Summary:**
-- [Agent Research 2026](./agent-research-2026.md) - 13 sections covering agentic workflows, multi-agent orchestration, tool calling optimization, memory systems, security, evaluation, debugging, cost optimization, production architectures (~18K words)
-- [Agent Quick Reference](./agent-quick-reference.md) - Fast lookup guide with checklists, decision trees, metrics, architecture comparison, and production best practices
+- [Agent Research 2026](./agent-research-2026.md) - 14 sections covering agentic workflows, multi-agent orchestration, tool calling optimization, memory systems, security, evaluation, debugging, cost optimization, production architectures, code-level patterns (~23K words)
+- [Agent Quick Reference](./agent-quick-reference.md) - Fast lookup guide with checklists, decision trees, metrics, architecture comparison, production best practices, and code patterns from OpenManus
 
 **Key Papers & Frameworks:**
 - [Practical Guide for Agentic AI Workflows](https://www.emergentmind.com/papers/2512.08769) - 9 core best practices

@@ -1190,6 +1190,773 @@ Spawn subagents for:
 
 ---
 
+## 14. OpenManus: MetaGPT's Modular Agent Framework
+
+OpenManus is an open-source framework from the MetaGPT community that demonstrates another production approach to building general-purpose AI agents.
+
+### Core Architecture: Four-Layer Design
+
+**1. Agent Layer (Hierarchical Structure)**
+
+```
+Base: ToolCallAgent
+  ↓
+PlanningAgent (task decomposition)
+  ↓
+ReActAgent (think-act-observe)
+  ↓
+Manus (main agent, user entry point)
+```
+
+**Key insight:** Progressive specialization through inheritance. Each layer adds capabilities:
+- **ToolCallAgent**: Base class for tool/function calling
+- **PlanningAgent**: Adds task execution plan creation/management
+- **ReActAgent**: Implements think-act-observe loop pattern
+- **Manus**: Main agent that orchestrates everything
+
+**2. Tool Layer (External Integration)**
+
+Standard tools provided:
+- **Execution**: PythonExecute, Bash
+- **Web**: BrowserUseTool, GoogleSearch, WebSearch
+- **Files**: FileSaver, StrReplaceEditor
+- **Planning**: PlanningTool, CreateChatCompletion
+- **Control**: Terminate
+
+**3. Prompt Layer (Interaction Patterns)**
+
+Three prompt types define agent behavior:
+
+| Prompt Type | Purpose | Example Use |
+|-------------|---------|-------------|
+| **System Prompts** | Define agent role and capability scope | "You are an expert software architect" |
+| **Step Prompts** | Guide tool usage for specific steps | "Use BrowserUseTool to navigate to..." |
+| **Planning Prompts** | Enable task decomposition | "Break this into subtasks with dependencies" |
+
+**4. LLM Interaction Layer (Decision Engine)**
+
+Handles communication with LLMs for decision-making and content generation.
+
+### Supporting Components
+
+**Memory Component:**
+- Stores conversation history
+- Manages context across turns
+- Enables agent to reference past decisions
+
+**Flow Component:**
+- Graph-based workflow coordination
+- Multi-agent collaboration
+- Task routing and orchestration
+
+### Think-Act-Observe Loop (ReActAgent)
+
+**Pattern:**
+```
+1. Think: Reason about current state and next action
+2. Act: Execute tool call or action
+3. Observe: Process results and update understanding
+→ Repeat until task complete
+```
+
+**Implementation:**
+```python
+class ReActAgent:
+    def run(self, task):
+        while not done:
+            # Think
+            thought = self.reason_about_state(current_state)
+            
+            # Act
+            action = self.select_action(thought)
+            result = self.execute_action(action)
+            
+            # Observe
+            current_state = self.update_state(result)
+            done = self.check_completion(current_state)
+```
+
+**Difference from other frameworks:**
+- More structured than Codex's tool calling
+- More explicit than Claude Code's extension layer
+- Built-in planning vs external planning tools
+
+### Modular Design Philosophy
+
+**Key principle:** High extensibility through clear interfaces.
+
+**Component separation:**
+```
+/agents/          # Agent implementations
+/tools/           # Tool definitions
+/sandbox/         # Isolated execution environments
+/workflows/       # Workflow definitions
+/prompts/         # Prompt templates
+```
+
+**Benefits:**
+- Easy to add new tools without modifying agents
+- Clear boundaries between concerns
+- Reusable components across different agents
+
+### Workflow Management: Graph-Based
+
+**OpenManus uses directed graphs for workflows:**
+
+```python
+workflow = {
+    "start": {
+        "agent": "PlanningAgent",
+        "next": "execute"
+    },
+    "execute": {
+        "agent": "ReActAgent",
+        "next": ["verify", "error_handler"]
+    },
+    "verify": {
+        "agent": "ToolCallAgent",
+        "next": "end"
+    },
+    "error_handler": {
+        "agent": "ReActAgent",
+        "next": "execute"
+    }
+}
+```
+
+**Advantages:**
+- Visual representation of agent flow
+- Easy to modify and extend
+- Built-in error handling paths
+- Supports loops and branches
+
+### Prompt Engineering Patterns
+
+**1. System Prompt Structure**
+
+```markdown
+# Role Definition
+You are [specific role with expertise].
+
+# Capabilities
+You have access to the following tools:
+- [tool 1]: [when to use]
+- [tool 2]: [when to use]
+
+# Constraints
+- Always verify before making changes
+- Ask for clarification when ambiguous
+- Break complex tasks into steps
+
+# Output Format
+[Specify expected format]
+```
+
+**2. Step Prompt Pattern**
+
+```markdown
+Current Step: [step name]
+Objective: [what to accomplish]
+
+Available Tools:
+- [relevant tools for this step]
+
+Previous Context:
+[summary of previous steps]
+
+Instructions:
+1. [specific instruction 1]
+2. [specific instruction 2]
+
+Output Requirements:
+[expected output format]
+```
+
+**3. Planning Prompt Pattern**
+
+```markdown
+Task: [high-level task description]
+
+Break this down into:
+1. Subtasks with clear objectives
+2. Dependencies between subtasks
+3. Required tools for each subtask
+4. Success criteria for each subtask
+5. Estimated complexity (low/medium/high)
+
+Format:
+```json
+{
+  "subtasks": [
+    {
+      "id": "task-1",
+      "objective": "...",
+      "dependencies": [],
+      "tools": ["tool1", "tool2"],
+      "success_criteria": "...",
+      "complexity": "medium"
+    }
+  ]
+}
+```
+```
+
+### Containerized Execution
+
+**Docker-based isolation:**
+- Each agent runs in isolated container
+- Prevents side effects between agents
+- Easy deployment and scaling
+- Consistent environment across dev/prod
+
+**Security benefits:**
+- Limited access to host system
+- Resource limits per container
+- Network isolation
+- Audit trail through container logs
+
+### Multi-Agent Collaboration Patterns
+
+**1. Sequential Pipeline**
+```
+Agent A → Agent B → Agent C
+(planning) (execution) (verification)
+```
+
+**2. Parallel Execution**
+```
+       Agent B (security review)
+      /
+Agent A → Agent C (performance review)
+      \
+       Agent D (code quality)
+```
+
+**3. Hierarchical Delegation**
+```
+Manus (coordinator)
+  ↓
+PlanningAgent (breaks down task)
+  ↓ ↓ ↓
+ReActAgent₁  ReActAgent₂  ReActAgent₃
+(parallel workers)
+```
+
+### Key Differences from Other Frameworks
+
+| Aspect | OpenManus | Codex (OpenAI) | Claude Code (Anthropic) |
+|--------|-----------|----------------|------------------------|
+| **Architecture** | Hierarchical agents | Flat tools | Extension layers |
+| **Prompts** | Three types (system, step, planning) | Role hierarchy | CLAUDE.md + Skills |
+| **Workflow** | Graph-based | Agentic loop | Phases (gather, act, verify) |
+| **Planning** | Built-in PlanningAgent | Planning tool | Plan mode |
+| **Execution** | Docker containers | Sandbox | Checkpoints |
+| **Collaboration** | Graph coordination | Not emphasized | Subagents |
+
+### Best Practices from OpenManus
+
+**1. Agent Hierarchy Design**
+
+```
+✅ Good: Progressive specialization
+Base (tool calling) → Planning → ReAct → Specialized
+
+❌ Bad: Flat structure with all capabilities
+MonolithAgent (everything in one class)
+```
+
+**2. Prompt Type Separation**
+
+```
+✅ Good: Separate prompts by purpose
+- System: Role and capabilities
+- Step: Current action guidance
+- Planning: Task decomposition
+
+❌ Bad: Single giant prompt
+"You are X and you should do Y and when you see Z..."
+```
+
+**3. Graph-Based Workflows**
+
+```
+✅ Good: Explicit flow with error handling
+start → plan → execute → verify → end
+              ↓ (if error)
+           error_handler → retry
+
+❌ Bad: Implicit flow
+"Just keep trying until it works"
+```
+
+**4. Tool Organization**
+
+```
+✅ Good: Categorized by domain
+/tools/
+  execution/  (bash, python)
+  web/        (browser, search)
+  files/      (read, write, edit)
+  planning/   (plan, decompose)
+
+❌ Bad: Flat list
+All tools in one file
+```
+
+### Integration with Existing Patterns
+
+**OpenManus patterns complement existing approaches:**
+
+**1. Combine with Codex prompt caching:**
+- System prompts (static, cacheable)
+- Step prompts (dynamic, per-action)
+- Planning prompts (occasional, complex)
+
+**2. Combine with Claude Code extensions:**
+- CLAUDE.md = System prompts
+- Skills = Step prompt templates
+- Subagents = ReActAgent instances
+
+**3. Combine with multi-agent orchestration:**
+- OpenManus graphs = Hub-and-spoke coordinator
+- ReActAgent = Worker agents
+- Manus = Supervisor
+
+### Production Patterns
+
+**1. Task Decomposition**
+
+```python
+# OpenManus Planning Pattern
+task = "Build a REST API"
+
+plan = PlanningAgent.decompose(task)
+# Returns:
+[
+  {"step": "Design schema", "agent": "ToolCallAgent", "tools": ["FileSaver"]},
+  {"step": "Generate code", "agent": "ReActAgent", "tools": ["PythonExecute"]},
+  {"step": "Write tests", "agent": "ReActAgent", "tools": ["PythonExecute"]},
+  {"step": "Run tests", "agent": "ToolCallAgent", "tools": ["Bash"]},
+]
+```
+
+**2. Error Recovery**
+
+```python
+# Built-in error handling in workflow
+workflow = {
+    "execute": {
+        "agent": "ReActAgent",
+        "on_success": "verify",
+        "on_error": "diagnose",
+        "max_retries": 3
+    },
+    "diagnose": {
+        "agent": "PlanningAgent",
+        "next": "retry_or_escalate"
+    }
+}
+```
+
+**3. Tool Composition**
+
+```python
+# Tools can call other tools
+class BrowserUseTool:
+    def __init__(self):
+        self.search = GoogleSearch()
+        self.navigate = WebBrowser()
+    
+    def execute(self, task):
+        # Compose simpler tools
+        query = self.search.execute(task)
+        result = self.navigate.execute(query.url)
+        return result
+```
+
+### Key Takeaways for Prompt Engineering
+
+**1. Three-Prompt Pattern**
+- **System**: Set persistent context (role, capabilities, constraints)
+- **Step**: Guide current action (specific tools, format)
+- **Planning**: Enable decomposition (structure, dependencies)
+
+**2. Progressive Specialization**
+- Start with base capabilities
+- Add layers for specific behaviors
+- Each layer enhances, doesn't replace
+
+**3. Graph-Based Orchestration**
+- Explicit workflow definition
+- Built-in error paths
+- Visual representation aids debugging
+
+**4. Containerized Safety**
+- Isolated execution prevents side effects
+- Resource limits prevent runaway processes
+- Easy rollback through container snapshots
+
+**5. Tool Categorization**
+- Group by domain, not alphabetically
+- Clear purpose for each category
+- Makes tool selection easier for agents
+
+### Integration Example: OpenManus + Codex Patterns
+
+```python
+# Combine OpenManus hierarchy with Codex prompt structure
+
+# System prompt (OpenManus + Codex role hierarchy)
+system_prompt = f"""
+system: [Model instructions]
+developer: [Framework config - OpenManus workflow]
+user: [System prompt - agent role and capabilities]
+"""
+
+# Step prompt (OpenManus + Codex XML tags)
+step_prompt = f"""
+<current_step>
+  <objective>{task.objective}</objective>
+  <tools>{available_tools}</tools>
+  <context>{previous_steps}</context>
+</current_step>
+"""
+
+# Planning prompt (OpenManus + Claude Code plan mode)
+planning_prompt = f"""
+Task: {task}
+
+Create a graph-based execution plan with:
+1. Nodes: Subtasks with dependencies
+2. Edges: Execution flow
+3. Error handlers: Recovery paths
+4. Success criteria: Per-node validation
+"""
+```
+
+**Sources:**
+- [OpenManus Technical Analysis](https://llmmultiagents.com/en/blogs/OpenManus_Technical_Analysis)
+- [OpenManus Architecture Overview](https://albanna-tutorials.com/openmanus.html)
+- [OpenManus Official Documentation](https://openmanus.github.io/)
+- [OpenManus GitHub Repository](https://github.com/FoundationAgents/OpenManus) - Code analysis
+
+### Code-Level Insights from Implementation
+
+**Studying the actual OpenManus codebase reveals practical patterns:**
+
+#### 1. Agent State Management
+
+```python
+# app/agent/base.py
+class BaseAgent:
+    state: AgentState = AgentState.IDLE  # IDLE, RUNNING, FINISHED, ERROR
+    
+    @asynccontextmanager
+    async def state_context(self, new_state: AgentState):
+        """Safe state transitions with automatic rollback"""
+        previous_state = self.state
+        self.state = new_state
+        try:
+            yield
+        except Exception:
+            self.state = AgentState.ERROR  # Auto-transition on failure
+        finally:
+            self.state = previous_state  # Revert to previous
+```
+
+**Key insight:** Use context managers for state transitions. Ensures cleanup and error handling.
+
+#### 2. Stuck State Detection
+
+```python
+def is_stuck(self) -> bool:
+    """Detect agent loops by counting duplicate assistant messages"""
+    if len(self.memory.messages) < 2:
+        return False
+    
+    last_message = self.memory.messages[-1]
+    duplicate_count = sum(
+        1 for msg in reversed(self.memory.messages[:-1])
+        if msg.role == "assistant" and msg.content == last_message.content
+    )
+    
+    return duplicate_count >= self.duplicate_threshold  # Default: 2
+
+def handle_stuck_state(self):
+    """Inject prompt to break the loop"""
+    stuck_prompt = "Observed duplicate responses. Consider new strategies."
+    self.next_step_prompt = f"{stuck_prompt}\n{self.next_step_prompt}"
+```
+
+**Critical pattern:** Automatic loop detection + prompt injection to break loops.
+
+#### 3. ReAct Implementation
+
+```python
+# app/agent/react.py
+class ReActAgent(BaseAgent):
+    @abstractmethod
+    async def think(self) -> bool:
+        """Returns: should_act (bool)"""
+    
+    @abstractmethod
+    async def act(self) -> str:
+        """Returns: action result (str)"""
+    
+    async def step(self) -> str:
+        """Execute one cycle"""
+        should_act = await self.think()
+        if not should_act:
+            return "Thinking complete - no action needed"
+        return await self.act()
+```
+
+**Key insight:** `think()` returns boolean (should we act?), not the action itself. Cleaner separation.
+
+#### 4. Prompt Structure in Code
+
+```python
+# app/prompt/manus.py
+SYSTEM_PROMPT = (
+    "You are OpenManus, an all-capable AI assistant..."
+    "The initial directory is: {directory}"  # Variable injection
+)
+
+NEXT_STEP_PROMPT = """
+Based on user needs, proactively select the most appropriate tool...
+After using each tool, clearly explain the execution results and suggest next steps.
+
+If you want to stop, use the `terminate` tool/function call.
+"""
+```
+
+**Pattern:** System prompts are concise (2-3 sentences). Next-step prompts are longer with instructions.
+
+#### 5. Planning Tool Schema
+
+```python
+# app/tool/planning.py
+parameters: dict = {
+    "properties": {
+        "command": {
+            "enum": ["create", "update", "list", "get", 
+                    "set_active", "mark_step", "delete"]
+        },
+        "plan_id": {"type": "string"},
+        "steps": {"type": "array", "items": {"type": "string"}},
+        "step_status": {
+            "enum": ["not_started", "in_progress", "completed", "blocked"]
+        }
+    },
+    "required": ["command"]
+}
+```
+
+**Key insight:** Planning is a CRUD tool (create, read, update, delete plans). Not a separate agent.
+
+#### 6. Tool Collection Pattern
+
+```python
+# app/tool/tool_collection.py
+class ToolCollection:
+    def __init__(self, *tools: BaseTool):
+        self.tools = tools
+        self.tool_map = {tool.name: tool for tool in tools}
+    
+    def add_tool(self, tool: BaseTool):
+        """Skip if duplicate name (with warning)"""
+        if tool.name in self.tool_map:
+            logger.warning(f"Tool {tool.name} already exists, skipping")
+            return
+        self.tools += (tool,)
+        self.tool_map[tool.name] = tool
+```
+
+**Key insight:** Tools stored in both tuple (order) and dict (fast lookup). Duplicate protection built-in.
+
+#### 7. Manus Agent Composition
+
+```python
+# app/agent/manus.py
+class Manus(ToolCallAgent):
+    system_prompt: str = SYSTEM_PROMPT.format(directory=config.workspace_root)
+    next_step_prompt: str = NEXT_STEP_PROMPT
+    
+    max_observe: int = 10000  # Character limit for observations
+    max_steps: int = 20
+    
+    available_tools: ToolCollection = Field(
+        default_factory=lambda: ToolCollection(
+            PythonExecute(),
+            BrowserUseTool(),
+            StrReplaceEditor(),
+            AskHuman(),
+            Terminate(),
+        )
+    )
+    
+    mcp_clients: MCPClients = Field(default_factory=MCPClients)
+```
+
+**Pattern:** 
+- **Core tools** = built-in (Python, Browser, File, Human, Terminate)
+- **MCP tools** = external integrations (added dynamically)
+
+#### 8. Dynamic Tool Loading (MCP)
+
+```python
+async def connect_mcp_server(self, server_url: str, server_id: str):
+    """Connect and add tools dynamically"""
+    await self.mcp_clients.connect_sse(server_url, server_id)
+    
+    # Add only NEW tools from this server
+    new_tools = [
+        tool for tool in self.mcp_clients.tools 
+        if tool.server_id == server_id
+    ]
+    self.available_tools.add_tools(*new_tools)
+
+async def disconnect_mcp_server(self, server_id: str):
+    """Disconnect and remove tools"""
+    await self.mcp_clients.disconnect(server_id)
+    
+    # Rebuild tools WITHOUT disconnected server's tools
+    base_tools = [
+        tool for tool in self.available_tools.tools
+        if not isinstance(tool, MCPClientTool)
+    ]
+    self.available_tools = ToolCollection(*base_tools)
+    self.available_tools.add_tools(*self.mcp_clients.tools)
+```
+
+**Key insight:** MCP tools can be added/removed during runtime. Tools are namespaced by server_id.
+
+#### 9. Browser Context Awareness
+
+```python
+# app/agent/manus.py
+async def think(self) -> bool:
+    """Conditionally add browser context"""
+    recent_messages = self.memory.messages[-3:]
+    browser_in_use = any(
+        tc.function.name == BrowserUseTool().name
+        for msg in recent_messages
+        if hasattr(msg, 'tool_calls')
+    )
+    
+    if browser_in_use and self.browser_context_helper:
+        # Add browser state to prompt
+        context = await self.browser_context_helper.get_context()
+        self.next_step_prompt = f"{context}\n{original_prompt}"
+```
+
+**Key insight:** Context injection is conditional based on recent tool usage. Saves tokens.
+
+#### 10. ToolResult Composition
+
+```python
+# app/tool/base.py
+class ToolResult(BaseModel):
+    output: Any = None
+    error: Optional[str] = None
+    base64_image: Optional[str] = None
+    system: Optional[str] = None
+    
+    def __add__(self, other: "ToolResult"):
+        """Combine multiple tool results"""
+        return ToolResult(
+            output=self.output + other.output if both else one,
+            error=combine(self.error, other.error),
+            base64_image=first_non_none,  # Can't concatenate images
+            system=combine(self.system, other.system)
+        )
+```
+
+**Key insight:** Tool results can be combined with `+` operator. Useful for multi-step operations.
+
+#### 11. Memory Management
+
+```python
+# app/agent/base.py
+def update_memory(self, role: ROLE_TYPE, content: str, **kwargs):
+    """Type-safe memory updates"""
+    message_map = {
+        "user": Message.user_message,
+        "system": Message.system_message,
+        "assistant": Message.assistant_message,
+        "tool": lambda c, **kw: Message.tool_message(c, **kw),
+    }
+    
+    if role not in message_map:
+        raise ValueError(f"Unsupported role: {role}")
+    
+    self.memory.add_message(message_map[role](content, **kwargs))
+```
+
+**Pattern:** Factory pattern for message creation. Enforces type safety.
+
+#### 12. Execution Loop with Max Steps
+
+```python
+async def run(self, request: Optional[str] = None) -> str:
+    """Main execution loop"""
+    if request:
+        self.update_memory("user", request)
+    
+    results = []
+    async with self.state_context(AgentState.RUNNING):
+        while (self.current_step < self.max_steps 
+               and self.state != AgentState.FINISHED):
+            self.current_step += 1
+            logger.info(f"Step {self.current_step}/{self.max_steps}")
+            
+            step_result = await self.step()
+            
+            # Check for stuck state
+            if self.is_stuck():
+                self.handle_stuck_state()
+            
+            results.append(f"Step {self.current_step}: {step_result}")
+        
+        if self.current_step >= self.max_steps:
+            self.current_step = 0
+            self.state = AgentState.IDLE
+            results.append(f"Terminated: Max steps ({self.max_steps})")
+    
+    await SANDBOX_CLIENT.cleanup()
+    return "\n".join(results)
+```
+
+**Key patterns:**
+- State context manager for cleanup
+- Stuck detection after each step
+- Reset state after max steps
+- Sandbox cleanup always happens
+
+### Production Implementation Patterns Summary
+
+**From OpenManus codebase:**
+
+1. **State Management**: Use context managers for safe transitions
+2. **Loop Detection**: Count duplicate assistant messages, inject prompt to break
+3. **Think vs Act**: `think()` returns bool (should act?), cleaner separation
+4. **Prompt Structure**: System (concise) + Next-step (detailed instructions)
+5. **Tool Organization**: Tuple (order) + Dict (lookup), duplicate protection
+6. **Dynamic Tools**: MCP tools added/removed at runtime, namespaced by server
+7. **Conditional Context**: Only inject tool-specific context when tool was recently used
+8. **Tool Results**: Composable with `+` operator for multi-step ops
+9. **Memory Safety**: Factory pattern for message creation, type enforcement
+10. **Execution Loop**: State context + stuck detection + cleanup always happens
+
+**Key differences from documented architecture:**
+- Planning is a CRUD tool, not a separate agent layer
+- Browser context injected conditionally (token optimization)
+- MCP tools can be hot-swapped during execution
+- Stuck detection is automatic, not manual
+- Tool results are composable objects, not strings
+
+---
+
 ## Last Updated
 
 January 24, 2026

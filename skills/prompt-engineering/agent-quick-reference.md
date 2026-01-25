@@ -301,10 +301,12 @@ Scale-out critical? → Mesh
 |---------|--------|----------|
 | **Quadratic token growth** | Context exhaustion | Compaction at 60% limit |
 | **Tool flapping** | Wasted cost, loops | Max 3 retries, analyze failures |
+| **Agent stuck in loops** | Repeating failed actions | Auto-detect duplicates, inject prompt to break |
 | **Cache misses** | 2-5x cost increase | Static first, dynamic last |
 | **No security** | Data leaks, abuse | Implement 5 safety patterns |
 | **Task success only** | Silent failures | Use HB-Eval metrics |
 | **Isolated prompt optimization** | Suboptimal | Think token flow across architecture |
+| **No state cleanup** | Resource leaks | Use context managers for state transitions |
 
 ---
 
@@ -347,18 +349,20 @@ Scale-out critical? → Mesh
 
 ## Agent Architecture Comparison (2026)
 
-### OpenAI Codex vs Anthropic Claude Code
+### Three Production Approaches
 
-| Aspect | Codex (OpenAI) | Claude Code (Anthropic) |
-|--------|----------------|------------------------|
-| **Philosophy** | Prompt-centric | Extension ecosystem |
-| **Context Strategy** | Role hierarchy, compaction | Layered loading, subagents |
-| **Memory** | Stateless (optional previous_response_id) | Ephemeral sessions + CLAUDE.md |
-| **Extensions** | Tools in flat list | CLAUDE.md, Skills, MCP, Subagents, Hooks |
-| **Caching** | Static first, dynamic last | Extension layering |
-| **Permissions** | Sandbox + approval gates | Modes + allowlists + checkpoints |
+| Aspect | Codex (OpenAI) | Claude Code (Anthropic) | OpenManus (MetaGPT) |
+|--------|----------------|------------------------|---------------------|
+| **Philosophy** | Prompt-centric | Extension ecosystem | Hierarchical agents |
+| **Architecture** | Flat tools | Extension layers | ToolCall → Planning → ReAct → Manus |
+| **Context Strategy** | Role hierarchy, compaction | Layered loading, subagents | System/Step/Planning prompts |
+| **Workflow** | Agentic loop | Gather → Act → Verify | Graph-based coordination |
+| **Planning** | Planning tool | Plan mode | Built-in PlanningAgent |
+| **Execution** | Sandbox | Checkpoints | Docker containers |
+| **Collaboration** | Tool calling | Subagents | Graph coordination |
+| **Prompts** | Role hierarchy | CLAUDE.md + Skills | System + Step + Planning |
 
-**Key insight:** Both converge on same core patterns (agentic loop, tool calling, caching), but differ in extension philosophy.
+**Key insight:** All converge on agentic loops, tool calling, and context management, but differ in how they structure and orchestrate agents.
 
 ---
 
@@ -424,6 +428,28 @@ External:
 - ✅ Explore before implementing (plan mode first)
 - ✅ Delegate, don't dictate (trust agent to figure out details)
 - ✅ Interrupt and steer (can stop and redirect anytime)
+
+### From OpenManus (MetaGPT)
+
+**Agent Hierarchy:**
+- ✅ Progressive specialization (Base → Planning → ReAct → Main)
+- ✅ Each layer adds capabilities, doesn't replace
+- ✅ Clear inheritance chain
+
+**Three-Prompt Pattern:**
+1. **System Prompt** - Role, capabilities, constraints (persistent)
+2. **Step Prompt** - Current action guidance (per-step)
+3. **Planning Prompt** - Task decomposition (complex tasks)
+
+**Graph-Based Workflows:**
+- ✅ Explicit flow definition (nodes + edges)
+- ✅ Built-in error paths (on_success, on_error)
+- ✅ Visual representation aids debugging
+
+**Tool Organization:**
+- ✅ Categorize by domain (execution, web, files, planning)
+- ✅ Clear purpose for each category
+- ✅ Composable tools (tools can call other tools)
 
 **Context Optimization:**
 - ✅ Keep CLAUDE.md <500 lines
@@ -562,9 +588,95 @@ Optimization levers:
 
 ---
 
+## Code Patterns: OpenManus Implementation
+
+### Stuck Detection Pattern
+```python
+def is_stuck(self) -> bool:
+    """Count duplicate assistant messages"""
+    last_message = self.memory.messages[-1]
+    duplicate_count = sum(
+        1 for msg in reversed(self.memory.messages[:-1])
+        if msg.role == "assistant" and msg.content == last_message.content
+    )
+    return duplicate_count >= 2
+
+def handle_stuck_state(self):
+    """Inject prompt to break loop"""
+    stuck_prompt = "Observed duplicate responses. Try new strategies."
+    self.next_step_prompt = f"{stuck_prompt}\n{self.next_step_prompt}"
+```
+
+### State Management Pattern
+```python
+@asynccontextmanager
+async def state_context(self, new_state):
+    """Safe state transitions with auto-rollback"""
+    previous_state = self.state
+    self.state = new_state
+    try:
+        yield
+    except Exception:
+        self.state = AgentState.ERROR
+    finally:
+        self.state = previous_state  # Always revert
+```
+
+### Conditional Context Injection
+```python
+async def think(self) -> bool:
+    """Only inject context when tool recently used"""
+    recent_messages = self.memory.messages[-3:]
+    browser_in_use = any(
+        tc.function.name == BrowserUseTool().name
+        for msg in recent_messages
+    )
+    
+    if browser_in_use:
+        context = await self.browser_context_helper.get_context()
+        self.next_step_prompt = f"{context}\n{original_prompt}"
+```
+
+### Tool Collection Pattern
+```python
+class ToolCollection:
+    def __init__(self, *tools):
+        self.tools = tools  # Order preserved (tuple)
+        self.tool_map = {tool.name: tool for tool in tools}  # Fast lookup (dict)
+    
+    def add_tool(self, tool):
+        """Duplicate protection"""
+        if tool.name in self.tool_map:
+            logger.warning(f"Tool {tool.name} exists, skipping")
+            return
+        self.tools += (tool,)
+        self.tool_map[tool.name] = tool
+```
+
+### Composable Tool Results
+```python
+class ToolResult:
+    output: Any
+    error: Optional[str]
+    base64_image: Optional[str]
+    
+    def __add__(self, other):
+        """Combine results with + operator"""
+        return ToolResult(
+            output=self.output + other.output,
+            error=combine(self.error, other.error),
+            base64_image=first_non_none  # Can't concatenate
+        )
+
+# Usage:
+result = tool1() + tool2() + tool3()
+```
+
+---
+
 ## Further Reading
 
-- **Full research:** `agent-research-2026.md` (13 sections, comprehensive)
+- **Full research:** `agent-research-2026.md` (14 sections, comprehensive)
   - Section 1: OpenAI Codex architecture
   - Section 13: Anthropic Claude Code architecture
 - **Techniques:** `techniques-catalog.md` (65+ techniques)

@@ -146,8 +146,8 @@ The skill will guide you through:
 - **techniques-catalog.md** - 65+ prompting techniques with examples (including agent-specific patterns)
 - **model-comparison.md** - Side-by-side model comparison and adaptation guide
 - **prompt-libraries.md** - Comprehensive prompt library resources and discovery
-- **agent-research-2026.md** - ⭐ NEW: Comprehensive research summary on production-ready agentic systems (13 sections, ~18K words)
-- **agent-quick-reference.md** - ⭐ NEW: Fast lookup guide for agent development (checklists, decision trees, metrics)
+- **agent-research-2026.md** - ⭐ NEW: Comprehensive research summary on production-ready agentic systems (14 sections, ~23K words, includes code analysis)
+- **agent-quick-reference.md** - ⭐ NEW: Fast lookup guide for agent development (checklists, decision trees, metrics, code patterns)
 
 ## Integration
 
