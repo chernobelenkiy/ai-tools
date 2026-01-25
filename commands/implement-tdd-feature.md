@@ -65,6 +65,7 @@ If the feature has UI components:
 
 1. **Spawn librarian agent** to:
    - Update project documentation (README, API docs, etc.) to reflect changes.
+   - **Update `CHANGELOG.md`** following the "Keep a Changelog" standard.
    - Log the implementation in the project's knowledge base.
    - Archive or delete any documentation that is now obsolete.
    - Ensure best practices for IT documentation are followed.
