@@ -1,8 +1,8 @@
-# 🤖 AI Tools
+# AI Tools
 
-Agents, commands, and MCP servers for Claude Code and Cursor.
+A curated collection of AI agent personas, slash commands, skills, and MCP configurations for Claude Code and Cursor.
 
-## ⚡ Quick Start
+## Quick Start
 
 ```bash
 git clone https://github.com/yourusername/ai-tools.git ~/projects/ai-tools
@@ -11,47 +11,77 @@ cd ~/projects/ai-tools && ./sync.sh
 
 ---
 
-## 🚀 Commands
+## Commands
+
+Slash commands in `commands/` orchestrate multi-agent workflows:
 
 | Command | Description |
 |---------|-------------|
-| `/implement-feature` | Plan → Implement → Test → Review |
-| `/test-code` | Write tests (Playwright/Jest/Vitest) |
-| `/refactor-code` | Simplify and improve readability |
-| `/team-review` | Multi-agent review (Architect, UX, Sales, PM) |
-| `/prd-creation` | Create PRD for a new feature |
+| `/implement-feature` | Standard workflow: Plan → Implement → Test → Refactor → Verify |
+| `/implement-tdd-feature` | TDD workflow: Tests first → Implement → Refactor → Verify |
+| `/implement-bdd-feature` | BDD workflow: Gherkin scenarios → Tests → Implement → Verify |
+| `/test-code` | Analyze code, write automated tests (Playwright/Jest/Vitest) |
+| `/refactor-code` | Simplify and improve code readability and scalability |
+| `/prd-creation` | Create a comprehensive Product Requirements Document |
+| `/team-review` | Multi-agent review (Architect, UX, Sales, PM, Refactorer) |
+| `/design-review` | UX/UI audit: Audit → Critique → Optimize → Verify |
+| `/design-system` | Build a design system: Tokens → Components → Patterns → Docs |
+| `/business-review` | Product-marketing audit using 5C/SWOT framework |
 
 ---
 
-## 🔌 MCP Servers
+## Agents
+
+Agent personas in `agents/` with specialized expertise:
+
+| Agent | Description |
+|-------|-------------|
+| `code-architect` | Senior Full-Stack Architect (Clean Architecture, SOLID, DDD) |
+| `code-tester` | QA Automation Engineer (Playwright, Jest, Vitest) |
+| `code-refactorer` | Code simplification and maintainability expert |
+| `ux-designer` | UX/UI Designer using Stitch and Figma |
+| `project-manager` | Task decomposition, P0-P2 priorities, T-shirt sizing |
+| `sales-marketer` | Growth marketing, CRO, and conversion optimization |
+| `build-verificator` | Quality gate verification and completeness audits |
+| `mobile-architect` | Flutter/cross-platform mobile specialist |
+| `ai-prompter` | Prompt engineering and LLM orchestration expert |
+| `agent-browser` | Browser automation for testing and data extraction |
+
+---
+
+## Skills
+
+Executable skills in `skills/` for specialized tasks:
+
+| Skill | Description |
+|-------|-------------|
+| `feature-implementation` | Orchestrates Standard, TDD, or BDD workflows with quality gates |
+| `prompt-engineering` | Research-backed prompt optimization for Claude, GPT, Gemini, etc. |
+| `poc-hypothesis` | Quick technical validation before full implementation |
+| `humanizer` | Remove AI writing patterns to sound more natural |
+| `agent-browser` | Browser automation CLI for testing and interaction |
+
+---
+
+## MCP Servers
+
+Reference configurations in `mcp/mcp.json`:
 
 | Server | Purpose |
 |--------|---------|
 | **Context7** | Up-to-date library documentation |
-| **Playwright** | Browser testing |
-| **GitHub** | Repository operations |
-| **Stitch** | UI design & code generation |
+| **Playwright** | Browser automation and testing |
+| **GitHub** | Repository operations via Docker |
+| **Figma** | Design context extraction |
+| **Stitch** | AI-powered UI prototyping |
+| **Vercel** | Deployment and hosting |
+| **Sentry** | Error monitoring |
+| **DeepWiki** | Documentation search |
+| **Agents Playbook** | Agent workflow patterns |
 
 ---
 
-## 🤖 Top Agents (`subagents/`)
-
-- `code-architect`: Architecture & development
-- `code-tester`: QA & automated tests
-- `ux-designer`: UI/UX (Stitch/Figma)
-- `project-manager`: Planning & P0-P2 tasks
-
----
-
-## 🛠 Skills (`skills/`)
-
-- `feature-implementation`: TDD/BDD workflows
-- `prompt-engineering`: Research-backed prompts
-- `poc-hypothesis`: Quick technical validation
-
----
-
-## ⚙️ Env Vars
+## Environment Variables
 
 ```bash
 export GITHUB_PERSONAL_ACCESS_TOKEN="ghp_..."
@@ -60,14 +90,16 @@ export OPENAI_API_KEY="sk-..."
 
 ---
 
-## 📝 Principles
+## Principles
 
-1. **Plan First** — Ask before coding.
-2. **Audit** — Reuse existing code.
-3. **No Placeholders** — Full implementation only.
-4. **Context7** — Always use for docs.
+1. **Plan First** — Always ask clarifying questions before coding
+2. **Audit & Reuse** — Search for existing patterns before creating new ones
+3. **No Placeholders** — Full implementation only, no TODOs or FIXMEs
+4. **Context7** — Always use for up-to-date library documentation
+5. **Verify** — Never mark done without build verification
 
 ---
 
 ## License
+
 MIT

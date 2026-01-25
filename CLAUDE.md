@@ -3,38 +3,97 @@
 Guidance for Claude Code when working in this repository.
 
 ## Repository Overview
-A curated collection of AI agent personas, slash commands, and MCP configurations for building advanced AI-assisted workflows.
+
+A curated collection of AI agent personas, slash commands, skills, and MCP configurations for building advanced AI-assisted workflows.
 
 ## Key Conventions
+
 1. **Planning First**: Always ask clarifying questions and present a plan before implementation.
 2. **Audit & Reuse**: Search for existing components/patterns before creating new ones.
 3. **No Placeholders**: Fully implement features; never leave `TODO` or `FIXME` comments.
 4. **Minimalism**: Make precise, non-destructive changes. Avoid unnecessary files or logs.
 5. **Context7**: Use `mcp__context7__resolve-library-id` and `mcp__context7__query-docs` for up-to-date library documentation.
-
-## Commands
-Custom slash commands in `commands/` orchestrate multi-agent workflows:
-- `/implement-feature`: Plan → Implement → Test → Review → Verify.
-- `/design-review`: Audit → Critique → Optimize (based on `ux-designer`).
-- `/team-review`: Multi-agent review (Architect, UX, Sales, PM, Refactorer).
-- `/refactor-code`: Simplify and improve readability.
+6. **Build Verification**: Never mark a task as "Done" without successful build and test verification.
 
 ## Structure
-- `subagents/`: Agent personas with YAML frontmatter.
-- `commands/`: Markdown-based workflow orchestrations.
-- `skills/`: Executable Claude Code skills (TypeScript).
-- `mcp/`: MCP server configurations (Context7, Figma, Stitch, etc.).
+
+```
+ai-tools/
+├── agents/           # Agent personas with YAML frontmatter
+├── commands/         # Slash command workflow orchestrations
+├── skills/           # Executable Claude Code skills
+└── mcp/              # MCP server configurations
+```
+
+## Commands
+
+Custom slash commands in `commands/` orchestrate multi-agent workflows:
+
+| Command | Description |
+|---------|-------------|
+| `/implement-feature` | Standard: Plan → Implement → Test → Refactor → Verify |
+| `/implement-tdd-feature` | TDD: Tests first → Implement → Refactor → Verify |
+| `/implement-bdd-feature` | BDD: Gherkin → Tests → Implement → Verify |
+| `/test-code` | Write automated tests (Playwright/Jest/Vitest) |
+| `/refactor-code` | Simplify and improve readability |
+| `/prd-creation` | Create Product Requirements Document |
+| `/team-review` | Multi-agent review (Architect, UX, Sales, PM, Refactorer) |
+| `/design-review` | UX audit: Audit → Critique → Optimize → Verify |
+| `/design-system` | Build design system: Tokens → Components → Docs |
+| `/business-review` | Product-marketing audit (5C/SWOT framework) |
+
+## Agents
+
+Files in `agents/` define specialized AI personas:
+
+| Agent | Purpose |
+|-------|---------|
+| `code-architect` | Full-stack architecture and implementation |
+| `code-tester` | QA automation (Playwright, Jest, Vitest) |
+| `code-refactorer` | Code simplification and maintainability |
+| `ux-designer` | UX/UI design with Stitch and Figma |
+| `project-manager` | Planning, priorities (P0-P2), T-shirt sizing |
+| `sales-marketer` | Growth marketing and CRO |
+| `build-verificator` | Quality gates and completeness audits |
+| `mobile-architect` | Flutter/cross-platform development |
+| `ai-prompter` | Prompt engineering and LLM orchestration |
+| `agent-browser` | Browser automation and testing |
+
+## Skills
+
+Executable skills in `skills/`:
+
+- `feature-implementation`: Orchestrates Standard/TDD/BDD workflows
+- `prompt-engineering`: Research-backed prompt optimization
+- `poc-hypothesis`: Quick technical validation
+- `humanizer`: Remove AI writing patterns
+- `agent-browser`: Browser automation CLI
 
 ## Agent Format
-Files in `subagents/` must include YAML frontmatter:
+
+Files in `agents/` must include YAML frontmatter:
+
 ```markdown
 ---
 name: agent-name
 description: One-line description
-model: sonnet|opus|haiku
+tools: Tool1, Tool2, ...
+model: opus|sonnet|haiku
 color: color-name
 ---
 ```
 
 ## MCP Setup
-`mcp/mcp.json` contains reference configs. Inject tokens via environment variables; never commit credentials.
+
+`mcp/mcp.json` contains reference configs for:
+- **Context7**: Library documentation
+- **Playwright**: Browser testing
+- **GitHub**: Repository operations
+- **Figma**: Design context
+- **Stitch**: UI prototyping
+- **Vercel**: Deployment
+- **Sentry**: Error monitoring
+- **DeepWiki**: Documentation search
+- **Agents Playbook**: Workflow patterns
+
+Inject tokens via environment variables; never commit credentials.
