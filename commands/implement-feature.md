@@ -28,10 +28,28 @@ Before creating or executing any implementation plan, the following constraints 
    - Read requirements and gather context.
    - Audit existing codebase for reusable components and patterns.
    - Ask clarifying questions to the user.
+   - **Create User Journey Map** — Visualize the user's path through the feature:
+     - Define user persona and entry point.
+     - Map each step/screen the user interacts with.
+     - Identify user goals, actions, and expected outcomes at each step.
+     - Note potential pain points, emotions, and opportunities for delight.
+     - Highlight touchpoints with existing systems (auth, notifications, etc.).
+   - **Create Acceptance Criteria & Verification Checklist** — Save to existing PRD or create new document:
+     - **Location**: Add to existing PRD if available, otherwise create `docs/prds/[feature-name]/[YYYYMMDD]-[feature-name]-ac.md` or adapt to project's documentation structure.
+     - **Acceptance Criteria (AC)**: List testable conditions that must be true for the feature to be considered complete. Use format: `[ ] AC-1: [Given/When/Then or clear condition]`.
+     - **Verification Checklist**: Concrete checklist for build-verificator agent:
+       - [ ] All AC items pass manual/automated testing
+       - [ ] Unit test coverage meets project standards
+       - [ ] No regressions in existing functionality
+       - [ ] Error states and edge cases handled
+       - [ ] Performance within acceptable thresholds
+       - [ ] Accessibility requirements met (if UI)
+       - [ ] Security considerations addressed
+     - **Definition of Done (DoD)**: Project-specific completion criteria.
    - Create a phased roadmap with priorities (P0-P2) and T-shirt sizes.
    - Identify files to create/modify and potential risks.
 
-2. **Present roadmap** to user and wait for explicit approval.
+2. **Present roadmap, User Journey Map, and AC document** to user and wait for explicit approval.
 
 ## Phase 2: Implementation
 
@@ -43,9 +61,11 @@ Before creating or executing any implementation plan, the following constraints 
 ## Phase 3: Testing
 
 1. **Spawn code-tester agent** to:
-   - Write tests based on requirements.
+   - **Read AC document** created in Phase 1 — use Acceptance Criteria as test case source.
+   - Write tests that validate each AC item.
    - Add unit tests for new code.
    - Run all tests and fix any failures.
+   - **Update AC document**: Mark tested criteria with test file references.
 
 ## Phase 4: Refactoring & Quality
 
@@ -63,10 +83,14 @@ Skip if backend-only.
 ## Phase 6: Build Verification
 
 1. **Spawn build-verificator agent** to:
+   - **Read AC document** — use as primary verification source.
    - Verify the build compiles without errors.
+   - **AC Verification**: Walk through each Acceptance Criterion, mark as ✅ or ❌ with evidence.
+   - **Checklist Audit**: Complete all items in Verification Checklist from AC document.
    - **Requirement Audit**: Ensure all requirements and recommendations from previous steps/agents are met.
    - **Technical Validation**: Run full test suite and check for runtime issues.
    - **Agent Handoff Check**: Verify that all expert advice was either implemented, communicated, or logged.
+   - **Update AC document**: Record verification results and sign-off status.
 
 ## Phase 7: Documentation & Archiving
 

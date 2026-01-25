@@ -27,15 +27,35 @@ Before creating or executing any implementation plan, the following constraints 
 1. **Spawn plan agent** to:
    - Read requirements and gather context.
    - Audit codebase and draft business scenarios (Gherkin).
+   - **Create User Journey Map** — Visualize the user's path through the feature:
+     - Define user persona and entry point.
+     - Map each step/screen the user interacts with.
+     - Identify user goals, actions, and expected outcomes at each step.
+     - Note potential pain points, emotions, and opportunities for delight.
+     - Align journey steps with Gherkin scenarios (each scenario = journey touchpoint).
+   - **Create Acceptance Criteria & Verification Checklist** — Save to existing PRD or create new document:
+     - **Location**: Add to existing PRD if available, otherwise create `docs/prds/[feature-name]/[YYYYMMDD]-[feature-name]-ac.md` or adapt to project's documentation structure.
+     - **Acceptance Criteria (AC)**: Derive directly from Gherkin scenarios. Each scenario = one AC item. Format: `[ ] AC-1: Scenario: [scenario name]`.
+     - **Verification Checklist**: Concrete checklist for build-verificator agent:
+       - [ ] All Gherkin scenarios pass
+       - [ ] All unit tests pass
+       - [ ] Step definitions cover all scenarios
+       - [ ] No regressions in existing functionality
+       - [ ] Error states and edge cases handled
+       - [ ] Performance within acceptable thresholds
+       - [ ] Accessibility requirements met (if UI)
+     - **Definition of Done (DoD)**: Project-specific completion criteria.
    - Define technical test cases for unit coverage.
-   - Create roadmap and get user approval.
+   - Create roadmap, present User Journey Map and AC document, and get user approval.
 
 ## Phase 2: Specification (Red Phase)
 
 1. **Spawn code-tester agent** to write:
-   - `.feature` files with Gherkin scenarios.
+   - **Read AC document** — Gherkin scenarios from AC are the source of truth.
+   - `.feature` files with Gherkin scenarios matching AC items.
    - Unit tests and step definitions mapping Gherkin to code.
    - **Run all tests to confirm they fail.**
+   - **Update AC document**: Link each AC item to corresponding `.feature` file and line.
 
 ## Phase 3: Implementation (Green Phase)
 
@@ -55,9 +75,13 @@ If the feature has UI components:
 ## Phase 6: Build Verification
 
 1. **Spawn build-verificator agent** to:
+   - **Read AC document** — use as primary verification source.
    - Perform final build check and full suite run.
+   - **AC Verification**: Walk through each AC item (Gherkin scenario), mark as ✅ or ❌ with test results.
+   - **Checklist Audit**: Complete all items in Verification Checklist from AC document.
    - **Requirement Audit**: Cross-check implemented features against Gherkin scenarios and requirements.
    - **Recommendation Tracking**: Ensure all agent feedback is implemented or logged.
+   - **Update AC document**: Record verification results and sign-off status.
 
 ## Phase 7: Documentation & Archiving
 
