@@ -7,7 +7,7 @@
       "url": "https://mcp.sentry.dev/sse"
     },
     "GitHub": {
-      "command": "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server",
+      "command": "npx -y @modelcontextprotocol/server-github",
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
