@@ -93,7 +93,11 @@ If the feature has UI components:
    - Ensure best practices for IT documentation are followed.
 
 ## Completion
-1. **Propose Improvements**: Suggest 2-3 specific ways to further enhance the feature, improve performance, or reduce technical debt.
-2. **Final Summary**:
+1. **Session Analysis**: Perform a brief retrospective of the session:
+   - What worked well (tools, communication, logic)?
+   - What were the friction points or failures?
+   - How can the workflow or instructions be improved for next time?
+2. **Propose Improvements**: Suggest 2-3 specific ways to further enhance the feature, improve performance, or reduce technical debt.
+3. **Final Summary**:
    - Summarize implementation and report test metrics.
    - Mark all todos as completed.
