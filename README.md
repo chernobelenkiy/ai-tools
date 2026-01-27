@@ -27,6 +27,7 @@ Slash commands in `commands/` orchestrate multi-agent workflows:
 | `/design-review` | UX/UI audit: Audit → Critique → Optimize → Verify |
 | `/design-system` | Build a design system: Tokens → Components → Patterns → Docs |
 | `/business-review` | Product-marketing audit using 5C/SWOT framework |
+| `/research` | Comprehensive research: Context -> Search -> Brainstorm -> Propose |
 
 ---
 
@@ -46,6 +47,7 @@ Agent personas in `agents/` with specialized expertise:
 | `mobile-architect` | Flutter/cross-platform mobile specialist |
 | `ai-prompter` | Prompt engineering and LLM orchestration expert |
 | `agent-browser` | Browser automation for testing and data extraction |
+| `researcher` | Creative researcher: Web search, Context7, brainstorming |
 
 ---
 
