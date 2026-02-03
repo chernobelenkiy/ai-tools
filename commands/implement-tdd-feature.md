@@ -22,6 +22,7 @@ Before creating or executing any implementation plan, the following constraints 
 5. **Context Intake** — Gather all requirements, design links, and chat history containing recommendations from other agents involved in the project.
 6. **Explicit Approval** — Present the plan to the user and wait for explicit approval before proceeding to implementation phases. **Use the `AskQuestion` tool to present options or confirm the plan when possible.**
 7. **POC First** — If the hypothesis is dubious or the technical confidence level is low, prioritize creating a Proof of Concept (POC) using the `poc-hypothesis` skill to validate the approach before full implementation.
+8. **Confidence Check** — For each planning point, explicitly state the confidence level (High/Medium/Low). If the confidence level is not "High", add a step to use the **brainstorming agent** (Researcher with Brainstorming Protocol) to find solutions and propose alternatives before finalizing the plan.
 
 ### Planning Tasks
 1. **Spawn plan agent** to:
