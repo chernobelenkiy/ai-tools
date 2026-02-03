@@ -24,7 +24,6 @@ Slash commands in `commands/` orchestrate multi-agent workflows:
 | `/refactor-code` | Simplify and improve code readability and scalability |
 | `/prd-creation` | Create a comprehensive Product Requirements Document |
 | `/team-review` | Multi-agent review (Architect, UX, Sales, PM, Refactorer) |
-| `/design-system` | Build a design system: Tokens → Components → Patterns → Docs |
 | `/business-review` | Product-marketing audit using 5C/SWOT framework |
 ---
 
@@ -42,8 +41,6 @@ Agent personas in `agents/` with specialized expertise:
 | `sales-marketer` | Growth marketing, CRO, and conversion optimization |
 | `build-verificator` | Quality gate verification and completeness audits |
 | `mobile-architect` | Flutter/cross-platform mobile specialist |
-| `ai-prompter` | Prompt engineering and LLM orchestration expert |
-| `agent-browser` | Browser automation for testing and data extraction |
 | `researcher` | Creative researcher: Web search, Context7, brainstorming |
 
 ---
@@ -59,6 +56,7 @@ Executable skills in `skills/` for specialized tasks:
 | `poc-hypothesis` | Quick technical validation before full implementation |
 | `humanizer` | Remove AI writing patterns to sound more natural |
 | `agent-browser` | Browser automation CLI for testing and interaction |
+| `create-design-system` | Guides creation of design systems (goals, foundations, components) |
 
 ---
 
