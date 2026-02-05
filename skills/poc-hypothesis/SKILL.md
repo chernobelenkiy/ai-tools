@@ -1,6 +1,6 @@
 ---
 name: poc-hypothesis
-description: Create minimal POC to validate technical hypotheses. Reuse/call existing code, or write new if needed. Report success or propose alternatives on failure.
+description: Creates minimal POC to validate technical hypotheses, reusing existing code or writing new if needed. Use when testing technical feasibility, validating approaches before full implementation, or when the user asks "will this work?" or "can we do X?"
 ---
 
 # POC Hypothesis Validation Skill
